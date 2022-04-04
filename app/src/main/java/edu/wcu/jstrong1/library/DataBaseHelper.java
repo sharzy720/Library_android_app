@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO maybe breakout searching database onto its own thread
+
+/**
+ *
+ */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final String BOOK_TABLE = "BOOK_TABLE";
@@ -100,6 +104,48 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      *
+     * @param title
+     * @return
+     */
+    public List<BookModel> searchTitle(String title) {
+        List<BookModel> returnList = new ArrayList<>();
+
+        String queryString =
+                "SELECT *" +
+                        " FROM " + BOOK_TABLE +
+                        " WHERE " + COLUMN_BOOK_TITLE + " LIKE '%" + title + "%'";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+                int bookID = cursor.getInt(0);
+                String bookISBN = cursor.getString(1);
+                String bookTitle = cursor.getString(2);
+                String bookAuthor = cursor.getString(3);
+                byte[] smallCover = cursor.getBlob(4);
+                byte[] mediumCover = cursor.getBlob(5);
+                byte[] largeCover = cursor.getBlob(6);
+
+                BookModel newBook = new BookModel(bookID, bookISBN,
+                        bookTitle, bookAuthor, smallCover, mediumCover, largeCover);
+                returnList.add(newBook);
+
+            } while (cursor.moveToNext());
+        } else {
+
+        }
+        // close both the cursor and the db when done.
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    /**
+     *
      * @param author
      * @return
      */
@@ -151,48 +197,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "SELECT *" +
                         " FROM " + BOOK_TABLE +
                         " WHERE " + COLUMN_BOOK_ISBN + " LIKE '%" + isbn + "%'";
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(queryString, null);
-
-        if (cursor.moveToFirst()) {
-
-            do {
-                int bookID = cursor.getInt(0);
-                String bookISBN = cursor.getString(1);
-                String bookTitle = cursor.getString(2);
-                String bookAuthor = cursor.getString(3);
-                byte[] smallCover = cursor.getBlob(4);
-                byte[] mediumCover = cursor.getBlob(5);
-                byte[] largeCover = cursor.getBlob(6);
-
-                BookModel newBook = new BookModel(bookID, bookISBN,
-                        bookTitle, bookAuthor, smallCover, mediumCover, largeCover);
-                returnList.add(newBook);
-
-            } while (cursor.moveToNext());
-        } else {
-
-        }
-        // close both the cursor and the db when done.
-        cursor.close();
-        db.close();
-        return returnList;
-    }
-
-    /**
-     *
-     * @param title
-     * @return
-     */
-    public List<BookModel> searchTitle(String title) {
-        List<BookModel> returnList = new ArrayList<>();
-
-        String queryString =
-                "SELECT *" +
-                        " FROM " + BOOK_TABLE +
-                        " WHERE " + COLUMN_BOOK_TITLE + " LIKE '%" + title + "%'";
 
         SQLiteDatabase db = this.getReadableDatabase();
 

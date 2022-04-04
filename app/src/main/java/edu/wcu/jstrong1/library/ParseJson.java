@@ -43,21 +43,6 @@ public class ParseJson extends Application {
 //        this.largeCoverURL = null;
     }
 
-//    public static void main(String[] args) throws IOException {
-//        String isbn = "9780062651235";
-//        String exit = "0";
-//        Scanner s = new Scanner(System.in);
-//
-////        while (!exit.equals("1")) {
-////            System.out.print("Enter the isbn for a book (0 to exit): ");
-////            exit = s.nextLine();
-////            retrieveBook(exit);
-////        }
-////        retrieveBook(isbn);
-//    }
-
-
-
     public void retrieveBook(String isbn) {
         String sURL = "https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json";
         // Connect to the URL using java's native library
@@ -96,10 +81,7 @@ public class ParseJson extends Application {
     }
 
     public void getBookDetails(JsonElement root) {
-//    private void getBookDetails(JsonObject rootobj) {
-//    public void getBookDetails(String json) {
         JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
-//        JsonObject rootobj = new JsonParser().parse(json).getAsJsonObject();
         JsonObject records = (JsonObject) rootobj.get("records"); //just grab the zipcode
         Set<Map.Entry<String, JsonElement>> entrySet = records.entrySet();
 
@@ -142,50 +124,50 @@ public class ParseJson extends Application {
         }
     }
 
-    public String doShit(String urlString) {
-        HttpURLConnection connection = null;
-        BufferedReader reader = null;
-
-        try {
-            URL url = new URL(urlString);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.connect();
-
-
-            InputStream stream = connection.getInputStream();
-
-            reader = new BufferedReader(new InputStreamReader(stream));
-
-            StringBuffer buffer = new StringBuffer();
-            String line = "";
-
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line+"\n");
-                Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-
-            }
-
-            return buffer.toString();
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
+//    public String doShit(String urlString) {
+//        HttpURLConnection connection = null;
+//        BufferedReader reader = null;
+//
+//        try {
+//            URL url = new URL(urlString);
+//            connection = (HttpURLConnection) url.openConnection();
+//            connection.connect();
+//
+//
+//            InputStream stream = connection.getInputStream();
+//
+//            reader = new BufferedReader(new InputStreamReader(stream));
+//
+//            StringBuffer buffer = new StringBuffer();
+//            String line = "";
+//
+//            while ((line = reader.readLine()) != null) {
+//                buffer.append(line+"\n");
+//                Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+//
+//            }
+//
+//            return buffer.toString();
+//
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (connection != null) {
+//                connection.disconnect();
+//            }
+//            try {
+//                if (reader != null) {
+//                    reader.close();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return null;
+//    }
 
     public void parseFromString(String json) {
 //        Gson g = new Gson();
@@ -238,71 +220,71 @@ public class ParseJson extends Application {
     }
 
 
-//    private class JsonTask extends AsyncTask<String, String, String> {
+////    private class JsonTask extends AsyncTask<String, String, String> {
+////
+//        protected void onPreExecute() {
+////            super.onPreExecute();
 //
-        protected void onPreExecute() {
-//            super.onPreExecute();
-
-            pd = new ProgressDialog(ParseJson.this);
-            pd.setMessage("Please wait");
-            pd.setCancelable(false);
-            pd.show();
-        }
-
-        protected String doInBackground(String imageURL) {
-
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(imageURL);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-
-                InputStream stream = connection.getInputStream();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
-
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
-                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-
-                }
-
-                return buffer.toString();
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-//        @Override
-        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-            if (pd.isShowing()){
-                pd.dismiss();
-            }
-            Log.v("strong", "parsed json");
-        }
-//    }
+//            pd = new ProgressDialog(ParseJson.this);
+//            pd.setMessage("Please wait");
+//            pd.setCancelable(false);
+//            pd.show();
+//        }
+//
+//        protected String doInBackground(String imageURL) {
+//
+//
+//            HttpURLConnection connection = null;
+//            BufferedReader reader = null;
+//
+//            try {
+//                URL url = new URL(imageURL);
+//                connection = (HttpURLConnection) url.openConnection();
+//                connection.connect();
+//
+//
+//                InputStream stream = connection.getInputStream();
+//
+//                reader = new BufferedReader(new InputStreamReader(stream));
+//
+//                StringBuffer buffer = new StringBuffer();
+//                String line = "";
+//
+//                while ((line = reader.readLine()) != null) {
+//                    buffer.append(line+"\n");
+//                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+//
+//                }
+//
+//                return buffer.toString();
+//
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } finally {
+//                if (connection != null) {
+//                    connection.disconnect();
+//                }
+//                try {
+//                    if (reader != null) {
+//                        reader.close();
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            return null;
+//        }
+//
+////        @Override
+//        protected void onPostExecute(String result) {
+////            super.onPostExecute(result);
+//            if (pd.isShowing()){
+//                pd.dismiss();
+//            }
+//            Log.v("strong", "parsed json");
+//        }
+////    }
 }

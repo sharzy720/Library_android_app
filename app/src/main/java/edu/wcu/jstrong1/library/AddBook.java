@@ -122,11 +122,7 @@ public class AddBook extends AppCompatActivity {
         Glide.with(this).load(imageAddress).into(coverLocation);
     }
 
-    private void setPj(ParseJson newpj) {
-        pj = newpj;
-    }
-
-
+    // TODO breakout to Thread class
     private class JsonTask extends AsyncTask<String, String, String> {
 
         protected void onPreExecute() {
@@ -161,7 +157,6 @@ public class AddBook extends AppCompatActivity {
                         System.out.println("No book with this isbn");
                     }
                 } else {
-//                    ParseJson pj = new ParseJson();
                     pj.getBookDetails(root);
                     Log.v("strong", "test's value in JsonTask: " + pj.toString());
 
@@ -171,9 +166,6 @@ public class AddBook extends AppCompatActivity {
                             setBookCover(AddBook.this.pj.getMediumCoverURL(), bookCover);
                             bookTitle.setText("Title: " + AddBook.this.pj.getTitleString());
                             bookAuthor.setText("Author: " + AddBook.this.pj.getAuthorString());
-//                            setPj(pj);
-
-//                            pj.setIsbn("poop");
                         }
                     });
                 }
