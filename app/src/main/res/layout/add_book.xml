@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/ab_isbn_entry" android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp" android:layout_marginTop="50dp"
+            android:hint="ISBN"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_below="@id/ab_isbn_entry"
+            android:id="@+id/ab_buts" android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+        <Button
+                android:text="Search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/ab_search_but"
+                android:layout_weight="1" android:layout_marginEnd="10dp"/>
+        <Button
+                android:text="Add to Library"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/ab_add_but"
+                android:layout_weight="1" android:layout_marginStart="10dp"/>
+    </LinearLayout>
+    <ImageView
+            android:layout_width="200dp"
+            android:layout_height="350dp" tools:srcCompat="@tools:sample/avatars"
+            android:id="@+id/ab_book_cover" android:layout_centerInParent="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/ab_book_title"
+            android:layout_below="@id/ab_book_cover" android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp" android:layout_alignStart="@id/ab_book_cover"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/ab_book_author"
+            android:layout_below="@id/ab_book_title" android:layout_alignStart="@id/ab_book_title"/>
+</RelativeLayout>
