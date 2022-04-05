@@ -22,6 +22,9 @@ public class Library extends AppCompatActivity {
     private Button search;
     private Button viewAll;
     private RecyclerView bookList;
+    private LinearLayout l_main_layout;
+
+    private AppSettings settings;
 
     ArrayAdapter<BookModel> bookArrayAdapter;
     DataBaseHelper dataBaseHelper;
@@ -38,6 +41,13 @@ public class Library extends AppCompatActivity {
         search = findViewById(R.id.l_search_but);
         viewAll = findViewById(R.id.l_view_all_but);
         bookList = findViewById(R.id.l_book_list);
+        l_main_layout = findViewById(R.id.l_main_layout);
+
+        // Setting the background
+        settings = (AppSettings) getApplication();
+        String background = settings.getAppColor();
+        int id = getResources().getIdentifier(background, "drawable", this.getPackageName());
+        l_main_layout.setBackgroundResource(id);
 
         dataBaseHelper = new DataBaseHelper(Library.this);
         showCustomersOnListView(dataBaseHelper.getAllBooks());

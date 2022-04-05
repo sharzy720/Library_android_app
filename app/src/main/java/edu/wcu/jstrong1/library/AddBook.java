@@ -34,6 +34,9 @@ public class AddBook extends AppCompatActivity {
 
     private ProgressDialog pd;
 
+    private RelativeLayout ab_main_layout;
+    private AppSettings settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,14 @@ public class AddBook extends AppCompatActivity {
         bookCover = findViewById(R.id.ab_book_cover);
         bookTitle = findViewById(R.id.ab_book_title);
         bookAuthor = findViewById(R.id.ab_book_author);
+
+        ab_main_layout = findViewById(R.id.ab_main_layout);
+
+        // Setting the background
+        settings = (AppSettings) getApplication();
+        String background = settings.getAppColor();
+        int id = getResources().getIdentifier(background, "drawable", this.getPackageName());
+        ab_main_layout.setBackgroundResource(id);
 
         pj = new ParseJson();
         ch = new CoverHelper();
