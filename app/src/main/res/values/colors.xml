@@ -5,6 +5,41 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!--Solid colors-->
+    <color name="black">#000000</color>
+    <color name="charcoal">#ff333333</color>
+    <color name="blue">#222266</color>
+    <color name="lt_blue">#4444cc</color>
+    <color name="dk_blue">#111133</color>
+    <color name="red">#ff2222</color>
+    <color name="red1">#77662222</color>
+    <color name="lt_red">#CC4444</color>
+    <color name="dk_red">#331111</color>
+    <color name="magenta">#FF00FF</color>
+    <color name="lt_pink">#FF88FF</color>
+    <color name="dk_pink">#440044</color>
+    <color name="green">#226622</color>
+    <color name="lt_green">#44CC44</color>
+    <color name="dk_green">#113311</color>
+    <color name="cyan">#00FFFF</color>
+    <color name="dk_yellow">#dddd66</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#999999</color>
+    <color name="lt_grey">#bbbbbb</color>
+    <color name="dk_grey">#444444</color>
+    <color name="orange">#FF9933</color>
+    <color name="brown">#774422</color>
+    <color name="purple">#6644CC</color>
+    <color name="purple1">#aa00CC</color>
+    <color name="purple2">#bb66dd</color>
+    <color name="transparent">#00000000</color>
+
+    <!--Colors with translucency-->
+    <color name="trans_white">#EEFFFFFF</color>
+    <color name="trans_grey">#90909090</color>
+    <color name="trans_dk_grey">#99404040</color>
+    <color name="trans_black">#DD000000</color>
+    <color name="trans_black2">#99000000</color>
 </resources>
