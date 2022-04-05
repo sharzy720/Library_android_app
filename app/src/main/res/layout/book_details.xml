@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" android:background="@drawable/blue_gradient">
 
     <ImageView
             android:layout_width="200dp"
@@ -26,10 +26,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/bd_isbn"
             android:layout_below="@id/bd_author" android:layout_alignStart="@id/bd_cover"/>
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
             android:text="Delete Book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/bd_delete_but"
             android:layout_below="@id/bd_isbn" android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp" android:background="@drawable/button_style1"
+            android:paddingStart="20dp" android:paddingEnd="20dp"/>
 </RelativeLayout>

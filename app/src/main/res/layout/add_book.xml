@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" android:background="@drawable/blue_gradient">
 
     <EditText
             android:layout_width="match_parent"
@@ -18,16 +18,18 @@
             android:layout_height="wrap_content" android:layout_below="@id/ab_isbn_entry"
             android:id="@+id/ab_buts" android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
                 android:text="Search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/ab_search_but"
-                android:layout_weight="1" android:layout_marginEnd="10dp"/>
-        <Button
+                android:layout_weight="1" android:layout_marginEnd="10dp"
+                android:background="@drawable/button_style1"/>
+        <androidx.appcompat.widget.AppCompatButton
                 android:text="Add to Library"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/ab_add_but"
-                android:layout_weight="1" android:layout_marginStart="10dp"/>
+                android:layout_weight="1" android:layout_marginStart="10dp"
+                android:background="@drawable/button_style1"/>
     </LinearLayout>
     <ImageView
             android:layout_width="200dp"
