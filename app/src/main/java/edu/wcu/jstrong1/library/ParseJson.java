@@ -31,10 +31,12 @@ public class ParseJson extends Application {
     private String smallCoverURL;
     private String mediumCoverURL;
     private String largeCoverURL;
+    private Boolean validBook;
     ProgressDialog pd;
 
 
     public ParseJson() {
+        validBook = false;
 //        this.titleString = null;
 //        this.authorString = null;
 //        this.numOfPages = null;
@@ -114,6 +116,10 @@ public class ParseJson extends Application {
             authorString = author.getAsString();
             numOfPages = numberOfPages.getAsString();
 
+            if (titleString != null || !(titleString.equals(""))) {
+                validBook = true;
+            }
+
             Log.v("strong", "Book title: " + titleString);
             Log.v("strong", "Book author: " + authorString);
             Log.v("strong", "Number of pages: " + numOfPages);
@@ -123,51 +129,6 @@ public class ParseJson extends Application {
             break;
         }
     }
-
-//    public String doShit(String urlString) {
-//        HttpURLConnection connection = null;
-//        BufferedReader reader = null;
-//
-//        try {
-//            URL url = new URL(urlString);
-//            connection = (HttpURLConnection) url.openConnection();
-//            connection.connect();
-//
-//
-//            InputStream stream = connection.getInputStream();
-//
-//            reader = new BufferedReader(new InputStreamReader(stream));
-//
-//            StringBuffer buffer = new StringBuffer();
-//            String line = "";
-//
-//            while ((line = reader.readLine()) != null) {
-//                buffer.append(line+"\n");
-//                Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-//
-//            }
-//
-//            return buffer.toString();
-//
-//
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (connection != null) {
-//                connection.disconnect();
-//            }
-//            try {
-//                if (reader != null) {
-//                    reader.close();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
 
     public void parseFromString(String json) {
 //        Gson g = new Gson();
@@ -189,6 +150,14 @@ public class ParseJson extends Application {
                 ", largeCoverURL='" + largeCoverURL + '\'' +
                 ", pd=" + pd +
                 '}';
+    }
+
+    public Boolean getValidBook() {
+        return validBook;
+    }
+
+    public void setValidBook(Boolean validBook) {
+        this.validBook = validBook;
     }
 
     public String getIsbn() { return isbn; }
