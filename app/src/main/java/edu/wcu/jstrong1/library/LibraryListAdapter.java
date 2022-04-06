@@ -1,8 +1,6 @@
 package edu.wcu.jstrong1.library;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for library's recyclerView
+ */
 public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.MyViewHolder> {
 
     /**An array of strings holds the data**/
@@ -84,14 +84,10 @@ public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.
     @Override
     public LibraryListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view in this case a simple text view
-//        TextView v = (TextView)
-//                LayoutInflater.from(parent.getContext()).inflate(R.layout.my_text_view, parent, false);
-//        MyViewHolder vh = new MyViewHolder(v);
         ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.library_list_item, parent,
                 false);
 
         MyViewHolder vh = new MyViewHolder(v);
-//        vh.setOnClickListener(this);
         return vh;
     }//end
     //-------------------------------------------------------------------------------------------
@@ -110,7 +106,6 @@ public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.
          */
         public MyViewHolder(ViewGroup v) {
             super(v);
-//            textView = v;
             bookCover = v.findViewById(R.id.list_book_cover);
             bookTitle = v.findViewById(R.id.list_book_title);
             bookAuthor = v.findViewById(R.id.list_book_author);
@@ -128,7 +123,6 @@ public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.
 
         @Override
         public void onClick(View view) {
-//            itemListener.recyclerViewListClicked(view, this.getLayoutPosition());
             if (LibraryListAdapter.this.observer != null) {
                 TextView tv = (TextView) bookTitle;
                 Log.v("strong", "Layout position = " + this.getLayoutPosition());

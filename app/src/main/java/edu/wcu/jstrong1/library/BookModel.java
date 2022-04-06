@@ -1,16 +1,21 @@
 package edu.wcu.jstrong1.library;
 
+/**
+ * Model for a book
+ */
 public class BookModel {
 
-    private int id;
-    private String isbn;
-    private String title;
-    private String author;
-    private byte[] smallCover;
-    private byte[] mediumCover;
-    private byte[] largeCover;
+    private int id;             // A book's id given by the database
+    private String isbn;        // Isbn of a book
+    private String title;       // Title of a book
+    private String author;      // Author of a book
+    private byte[] smallCover;  // Byte array for a book's small cover
+    private byte[] mediumCover; // Byte array for a book's medium cover
+    private byte[] largeCover;  // Byte array for a book's large cover
 
-
+    /**
+     * Default constructor
+     */
     public BookModel() {
         id = -1;
         isbn = "error";
@@ -21,6 +26,16 @@ public class BookModel {
         largeCover = null;
     }
 
+    /**
+     * Constructor for creating a book with values
+     * @param id The books' database id
+     * @param isbn The books isbn
+     * @param title The books title
+     * @param author The books author
+     * @param smallCoverURL Url for the books small cover
+     * @param mediumCoverURL Url for the books medium cover
+     * @param largeCoverURL Url for the books large cover
+     */
     public BookModel(int id, String isbn, String title, String author, byte[] smallCoverURL, byte[] mediumCoverURL, byte[] largeCoverURL) {
         this.id = id;
         this.isbn = isbn;
@@ -42,6 +57,8 @@ public class BookModel {
                 ", largeCoverURL='" + largeCover + '\'' +
                 '}';
     }
+
+    // Getters and Setters
 
     public int getId() {
         return id;

@@ -3,12 +3,12 @@ package edu.wcu.jstrong1.library;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Class for book_details.xml
+ */
 public class BookDetails extends AppCompatActivity {
 
     private ImageView cover;
@@ -18,6 +18,11 @@ public class BookDetails extends AppCompatActivity {
     private Button deleteBook;
 
     private CoverHelper coverHelper;
+
+    private RelativeLayout bd_main_layout;
+
+    /** App's application class */
+    private AppSettings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,13 @@ public class BookDetails extends AppCompatActivity {
         author = findViewById(R.id.bd_author);
         isbn = findViewById(R.id.bd_isbn);
         deleteBook = findViewById(R.id.bd_delete_but);
+        bd_main_layout = findViewById(R.id.bd_main_layout);
+
+        // Setting the background
+        settings = (AppSettings) getApplication();
+        String background = settings.getAppColor();
+        int id = getResources().getIdentifier(background, "drawable", this.getPackageName());
+        bd_main_layout.setBackgroundResource(id);
 
         coverHelper = new CoverHelper();
 

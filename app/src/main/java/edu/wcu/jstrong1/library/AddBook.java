@@ -20,6 +20,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Class for add_book.xml
+ */
 public class AddBook extends AppCompatActivity {
 
     private EditText isbnEntry;
@@ -34,6 +37,11 @@ public class AddBook extends AppCompatActivity {
 
     private ProgressDialog pd;
 
+    private RelativeLayout ab_main_layout;
+
+    /** App's application class */
+    private AppSettings settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +54,23 @@ public class AddBook extends AppCompatActivity {
         bookTitle = findViewById(R.id.ab_book_title);
         bookAuthor = findViewById(R.id.ab_book_author);
 
+        ab_main_layout = findViewById(R.id.ab_main_layout);
+
+        // Setting the background
+        settings = (AppSettings) getApplication();
+        String background = settings.getAppColor();
+        int id = getResources().getIdentifier(background, "drawable", this.getPackageName());
+        ab_main_layout.setBackgroundResource(id);
+
         pj = new ParseJson();
+        pj.setIsbn("");
         ch = new CoverHelper();
 
         // Searching api for book with matching isbn number
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddBook.this, "Search clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddBook.this, "Search clicked", Toast.LENGTH_SHORT).show();
                 String isbn = isbnEntry.getText().toString();
                 // test isbn
 //                String isbn = "9781501120602";
@@ -71,24 +88,27 @@ public class AddBook extends AppCompatActivity {
         addToLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddBook.this, "Add clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddBook.this, "Add clicked", Toast.LENGTH_SHORT).show();
                 String isbn = null;
-                if (pj.getTitleString() == null) {
-                    Toast.makeText(AddBook.this, "No previous search", Toast.LENGTH_SHORT).show();
-                    isbn = isbnEntry.getText().toString();
-                    // test isbn
-//                    String isbn = "9781501120602";
-                    String test;
-                    try {
-                        test = new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
-                    } catch (ExecutionException | InterruptedException e) {
-                        e.printStackTrace();
+//                if (isbnEntry.getText().toString().matches("")) {
+                if (!pj.getValidBook()) {
+                    Toast.makeText(AddBook.this, "Search for book first", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (pj.getTitleString() == null) {
+//                        Toast.makeText(AddBook.this, "No previous search", Toast.LENGTH_SHORT).show();
+                        isbn = isbnEntry.getText().toString();
+                        // test isbn
+//                        isbn = "9781501120602";
+                        String test;
+                        try {
+                            test = new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
+                        } catch (ExecutionException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        pj.setIsbn(isbn);
                     }
-                    pj.setIsbn(isbn);
-                }
-                // Add book to database and display toast
+                    // Add book to database and display toast
 
-                if (!isbn.equals("")) {
                     BookModel bookModel;
                     try {
                         byte[] testImageBytes = ch.getImageFromUrl(pj.getSmallCoverURL());
@@ -98,9 +118,9 @@ public class AddBook extends AppCompatActivity {
                                 ch.getImageFromUrl(pj.getMediumCoverURL()),
                                 ch.getImageFromUrl(pj.getLargeCoverURL()));
 
-                        Toast.makeText(AddBook.this, bookModel.toString(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AddBook.this, bookModel.toString(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Toast.makeText(AddBook.this, "Error creating customer",
+                        Toast.makeText(AddBook.this, "Error creating book",
                                 Toast.LENGTH_SHORT).show();
                         bookModel = new BookModel();
                     }
@@ -108,25 +128,31 @@ public class AddBook extends AppCompatActivity {
 
                     boolean success = dataBaseHelper.addBook(bookModel);
 
-                    Toast.makeText(AddBook.this, "Success = " + success, Toast.LENGTH_SHORT).show();
+                    if (success) {
+                        Toast.makeText(AddBook.this, "Book Added to library", Toast.LENGTH_SHORT).show();
+                    }
+
 //                showCustomersOnListView();
                     Log.v("strong", "pj value in AddBook: " + pj.toString());
-                } else {
-
                 }
             }
         });
     }
 
+    /**
+     * Set book cover to an image url using glide
+     * @param imageAddress url to image
+     * @param coverLocation imageView to set image to
+     */
     private void setBookCover(String imageAddress, ImageView coverLocation) {
         Glide.with(this).load(imageAddress).into(coverLocation);
     }
 
-    private void setPj(ParseJson newpj) {
-        pj = newpj;
-    }
+    // TODO breakout to Thread class
 
-
+    /**
+     * AsyncTask for parsing json from api url
+     */
     private class JsonTask extends AsyncTask<String, String, String> {
 
         protected void onPreExecute() {
@@ -161,7 +187,6 @@ public class AddBook extends AppCompatActivity {
                         System.out.println("No book with this isbn");
                     }
                 } else {
-//                    ParseJson pj = new ParseJson();
                     pj.getBookDetails(root);
                     Log.v("strong", "test's value in JsonTask: " + pj.toString());
 
@@ -171,9 +196,6 @@ public class AddBook extends AppCompatActivity {
                             setBookCover(AddBook.this.pj.getMediumCoverURL(), bookCover);
                             bookTitle.setText("Title: " + AddBook.this.pj.getTitleString());
                             bookAuthor.setText("Author: " + AddBook.this.pj.getAuthorString());
-//                            setPj(pj);
-
-//                            pj.setIsbn("poop");
                         }
                     });
                 }

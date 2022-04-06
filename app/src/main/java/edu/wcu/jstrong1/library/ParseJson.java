@@ -11,18 +11,17 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Class for pulling data from a json element
+ */
 public class ParseJson extends Application {
     private String isbn;
     private String titleString;
@@ -31,10 +30,14 @@ public class ParseJson extends Application {
     private String smallCoverURL;
     private String mediumCoverURL;
     private String largeCoverURL;
+    private Boolean validBook;
     ProgressDialog pd;
 
-
+    /**
+     * Default constructor
+     */
     public ParseJson() {
+        validBook = false;
 //        this.titleString = null;
 //        this.authorString = null;
 //        this.numOfPages = null;
@@ -42,21 +45,6 @@ public class ParseJson extends Application {
 //        this.mediumCoverURL = null;
 //        this.largeCoverURL = null;
     }
-
-//    public static void main(String[] args) throws IOException {
-//        String isbn = "9780062651235";
-//        String exit = "0";
-//        Scanner s = new Scanner(System.in);
-//
-////        while (!exit.equals("1")) {
-////            System.out.print("Enter the isbn for a book (0 to exit): ");
-////            exit = s.nextLine();
-////            retrieveBook(exit);
-////        }
-////        retrieveBook(isbn);
-//    }
-
-
 
     public void retrieveBook(String isbn) {
         String sURL = "https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json";
@@ -95,11 +83,12 @@ public class ParseJson extends Application {
         }
     }
 
+    /**
+     * Pulls all book details from root JsonElement
+     * @param root Top JsonElement
+     */
     public void getBookDetails(JsonElement root) {
-//    private void getBookDetails(JsonObject rootobj) {
-//    public void getBookDetails(String json) {
         JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
-//        JsonObject rootobj = new JsonParser().parse(json).getAsJsonObject();
         JsonObject records = (JsonObject) rootobj.get("records"); //just grab the zipcode
         Set<Map.Entry<String, JsonElement>> entrySet = records.entrySet();
 
@@ -132,6 +121,10 @@ public class ParseJson extends Application {
             authorString = author.getAsString();
             numOfPages = numberOfPages.getAsString();
 
+            if (titleString != null || !(titleString.equals(""))) {
+                validBook = true;
+            }
+
             Log.v("strong", "Book title: " + titleString);
             Log.v("strong", "Book author: " + authorString);
             Log.v("strong", "Number of pages: " + numOfPages);
@@ -140,51 +133,6 @@ public class ParseJson extends Application {
             Log.v("strong", "Small cover: " + smallCoverURL);
             break;
         }
-    }
-
-    public String doShit(String urlString) {
-        HttpURLConnection connection = null;
-        BufferedReader reader = null;
-
-        try {
-            URL url = new URL(urlString);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.connect();
-
-
-            InputStream stream = connection.getInputStream();
-
-            reader = new BufferedReader(new InputStreamReader(stream));
-
-            StringBuffer buffer = new StringBuffer();
-            String line = "";
-
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line+"\n");
-                Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-
-            }
-
-            return buffer.toString();
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
     }
 
     public void parseFromString(String json) {
@@ -207,6 +155,16 @@ public class ParseJson extends Application {
                 ", largeCoverURL='" + largeCoverURL + '\'' +
                 ", pd=" + pd +
                 '}';
+    }
+
+    // Getters and Setters
+
+    public Boolean getValidBook() {
+        return validBook;
+    }
+
+    public void setValidBook(Boolean validBook) {
+        this.validBook = validBook;
     }
 
     public String getIsbn() { return isbn; }
@@ -236,73 +194,4 @@ public class ParseJson extends Application {
     public String getLargeCoverURL() {
         return largeCoverURL;
     }
-
-
-//    private class JsonTask extends AsyncTask<String, String, String> {
-//
-        protected void onPreExecute() {
-//            super.onPreExecute();
-
-            pd = new ProgressDialog(ParseJson.this);
-            pd.setMessage("Please wait");
-            pd.setCancelable(false);
-            pd.show();
-        }
-
-        protected String doInBackground(String imageURL) {
-
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(imageURL);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-
-                InputStream stream = connection.getInputStream();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
-
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
-                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-
-                }
-
-                return buffer.toString();
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-//        @Override
-        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-            if (pd.isShowing()){
-                pd.dismiss();
-            }
-            Log.v("strong", "parsed json");
-        }
-//    }
 }
