@@ -58,16 +58,17 @@ public class AddBook extends AppCompatActivity {
         ab_main_layout.setBackgroundResource(id);
 
         pj = new ParseJson();
+        pj.setIsbn("");
         ch = new CoverHelper();
 
         // Searching api for book with matching isbn number
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddBook.this, "Search clicked", Toast.LENGTH_SHORT).show();
-//                String isbn = isbnEntry.getText().toString();
+//                Toast.makeText(AddBook.this, "Search clicked", Toast.LENGTH_SHORT).show();
+                String isbn = isbnEntry.getText().toString();
                 // test isbn
-                String isbn = "9781501120602";
+//                String isbn = "9781501120602";
                 pj.setIsbn(isbn);
                 try {
                     new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
@@ -82,16 +83,17 @@ public class AddBook extends AppCompatActivity {
         addToLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddBook.this, "Add clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddBook.this, "Add clicked", Toast.LENGTH_SHORT).show();
                 String isbn = null;
-                if (isbnEntry.getText().toString().matches("")) {
-                    Toast.makeText(AddBook.this, "No isbn entered", Toast.LENGTH_SHORT).show();
+//                if (isbnEntry.getText().toString().matches("")) {
+                if (!pj.getValidBook()) {
+                    Toast.makeText(AddBook.this, "Search for book first", Toast.LENGTH_SHORT).show();
                 } else {
                     if (pj.getTitleString() == null) {
-                        Toast.makeText(AddBook.this, "No previous search", Toast.LENGTH_SHORT).show();
-//                    isbn = isbnEntry.getText().toString();
+//                        Toast.makeText(AddBook.this, "No previous search", Toast.LENGTH_SHORT).show();
+                        isbn = isbnEntry.getText().toString();
                         // test isbn
-                        isbn = "9781501120602";
+//                        isbn = "9781501120602";
                         String test;
                         try {
                             test = new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
@@ -111,9 +113,9 @@ public class AddBook extends AppCompatActivity {
                                 ch.getImageFromUrl(pj.getMediumCoverURL()),
                                 ch.getImageFromUrl(pj.getLargeCoverURL()));
 
-                        Toast.makeText(AddBook.this, bookModel.toString(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AddBook.this, bookModel.toString(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Toast.makeText(AddBook.this, "Error creating customer",
+                        Toast.makeText(AddBook.this, "Error creating book",
                                 Toast.LENGTH_SHORT).show();
                         bookModel = new BookModel();
                     }
@@ -121,7 +123,10 @@ public class AddBook extends AppCompatActivity {
 
                     boolean success = dataBaseHelper.addBook(bookModel);
 
-                    Toast.makeText(AddBook.this, "Success = " + success, Toast.LENGTH_SHORT).show();
+                    if (success) {
+                        Toast.makeText(AddBook.this, "Book Added to library", Toast.LENGTH_SHORT).show();
+                    }
+
 //                showCustomersOnListView();
                     Log.v("strong", "pj value in AddBook: " + pj.toString());
                 }
