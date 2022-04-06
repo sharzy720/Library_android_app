@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
+/**
+ * Class for book_details.xml
+ */
 public class BookDetails extends AppCompatActivity {
 
     private ImageView cover;
@@ -18,6 +20,8 @@ public class BookDetails extends AppCompatActivity {
     private CoverHelper coverHelper;
 
     private RelativeLayout bd_main_layout;
+
+    /** App's application class */
     private AppSettings settings;
 
     @Override

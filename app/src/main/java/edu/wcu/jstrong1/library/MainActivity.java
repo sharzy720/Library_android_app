@@ -7,6 +7,9 @@ import android.widget.RelativeLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * Class for activity_main.xml
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Button mm_view_books;
@@ -15,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RelativeLayout mm_main_layout;
 
+    /** App's application class */
     private AppSettings settings;
 
     @Override
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         int id = getResources().getIdentifier(background, "drawable", this.getPackageName());
         mm_main_layout.setBackgroundResource(id);
 
+        // On click for View Books button
         mm_view_books.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // On click for Add Book button
         mm_add_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // On click for Settings button
         mm_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

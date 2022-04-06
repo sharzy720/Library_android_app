@@ -8,8 +8,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * Thread Class for handling getting an image from an url
+ */
 public class ImageBytesThread implements Runnable {
+    /** Byte array for image found at url */
     private volatile byte[] imageBytes;
+
+    /** Address of image to retrieve and convert */
     private String imageAddress;
 
     @Override
@@ -29,6 +35,8 @@ public class ImageBytesThread implements Runnable {
             e.printStackTrace();
         }
     }
+
+    // Getters and Setters
 
     public void setImageAddress(String url) {
         imageAddress = url;

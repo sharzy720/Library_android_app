@@ -20,6 +20,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Class for add_book.xml
+ */
 public class AddBook extends AppCompatActivity {
 
     private EditText isbnEntry;
@@ -35,6 +38,8 @@ public class AddBook extends AppCompatActivity {
     private ProgressDialog pd;
 
     private RelativeLayout ab_main_layout;
+
+    /** App's application class */
     private AppSettings settings;
 
     @Override
@@ -134,11 +139,20 @@ public class AddBook extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set book cover to an image url using glide
+     * @param imageAddress url to image
+     * @param coverLocation imageView to set image to
+     */
     private void setBookCover(String imageAddress, ImageView coverLocation) {
         Glide.with(this).load(imageAddress).into(coverLocation);
     }
 
     // TODO breakout to Thread class
+
+    /**
+     * AsyncTask for parsing json from api url
+     */
     private class JsonTask extends AsyncTask<String, String, String> {
 
         protected void onPreExecute() {

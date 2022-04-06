@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * Class for library's recyclerView
+ */
 public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.MyViewHolder> {
 
     /**An array of strings holds the data**/

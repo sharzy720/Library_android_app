@@ -1,7 +1,5 @@
 package edu.wcu.jstrong1.library;
 
-import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +7,9 @@ import android.widget.RelativeLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Class for settings_page.xml
+ */
 public class SettingsPage extends AppCompatActivity implements View.OnClickListener{
 
     private Button redBut;
@@ -17,6 +18,7 @@ public class SettingsPage extends AppCompatActivity implements View.OnClickListe
     private Button orangeBut;
     private Button purpleBut;
 
+    /** App's application class */
     private AppSettings settings;
 
     private RelativeLayout mainLayout;

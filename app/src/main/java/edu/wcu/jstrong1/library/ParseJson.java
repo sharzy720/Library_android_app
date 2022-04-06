@@ -11,18 +11,17 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Class for pulling data from a json element
+ */
 public class ParseJson extends Application {
     private String isbn;
     private String titleString;
@@ -34,7 +33,9 @@ public class ParseJson extends Application {
     private Boolean validBook;
     ProgressDialog pd;
 
-
+    /**
+     * Default constructor
+     */
     public ParseJson() {
         validBook = false;
 //        this.titleString = null;
@@ -82,6 +83,10 @@ public class ParseJson extends Application {
         }
     }
 
+    /**
+     * Pulls all book details from root JsonElement
+     * @param root Top JsonElement
+     */
     public void getBookDetails(JsonElement root) {
         JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
         JsonObject records = (JsonObject) rootobj.get("records"); //just grab the zipcode
@@ -152,6 +157,8 @@ public class ParseJson extends Application {
                 '}';
     }
 
+    // Getters and Setters
+
     public Boolean getValidBook() {
         return validBook;
     }
@@ -187,73 +194,4 @@ public class ParseJson extends Application {
     public String getLargeCoverURL() {
         return largeCoverURL;
     }
-
-
-////    private class JsonTask extends AsyncTask<String, String, String> {
-////
-//        protected void onPreExecute() {
-////            super.onPreExecute();
-//
-//            pd = new ProgressDialog(ParseJson.this);
-//            pd.setMessage("Please wait");
-//            pd.setCancelable(false);
-//            pd.show();
-//        }
-//
-//        protected String doInBackground(String imageURL) {
-//
-//
-//            HttpURLConnection connection = null;
-//            BufferedReader reader = null;
-//
-//            try {
-//                URL url = new URL(imageURL);
-//                connection = (HttpURLConnection) url.openConnection();
-//                connection.connect();
-//
-//
-//                InputStream stream = connection.getInputStream();
-//
-//                reader = new BufferedReader(new InputStreamReader(stream));
-//
-//                StringBuffer buffer = new StringBuffer();
-//                String line = "";
-//
-//                while ((line = reader.readLine()) != null) {
-//                    buffer.append(line+"\n");
-//                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-//
-//                }
-//
-//                return buffer.toString();
-//
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (connection != null) {
-//                    connection.disconnect();
-//                }
-//                try {
-//                    if (reader != null) {
-//                        reader.close();
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            return null;
-//        }
-//
-////        @Override
-//        protected void onPostExecute(String result) {
-////            super.onPostExecute(result);
-//            if (pd.isShowing()){
-//                pd.dismiss();
-//            }
-//            Log.v("strong", "parsed json");
-//        }
-////    }
 }

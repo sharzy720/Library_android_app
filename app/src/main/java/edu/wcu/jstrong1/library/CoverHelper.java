@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- *
+ * Helper class for dealing with book cover images
  */
 public class CoverHelper extends AppCompatActivity {
 
@@ -42,9 +42,9 @@ public class CoverHelper extends AppCompatActivity {
 //    }
 
     /**
-     *
-     * @param imageBytes
-     * @return
+     * Get the image's bitmap from a byte array
+     * @param imageBytes An image's byte array
+     * @return An images bitmap
      */
     public Bitmap getImageBitmap(byte[] imageBytes) {
         Bitmap imageBitmap = null;
@@ -58,9 +58,9 @@ public class CoverHelper extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param url
-     * @return
+     * Using a thread to get a byte array based off of an image
+     * @param url Address to the image
+     * @return Byte array of image
      * @throws InterruptedException
      */
     public byte[] getImageFromUrl(String url) throws InterruptedException {

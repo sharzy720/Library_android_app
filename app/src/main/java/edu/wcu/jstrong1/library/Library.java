@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 /**
- *
+ * Class for library.xml
  */
 public class Library extends AppCompatActivity {
 
@@ -24,6 +24,7 @@ public class Library extends AppCompatActivity {
     private RecyclerView bookList;
     private LinearLayout l_main_layout;
 
+    /** App's application class */
     private AppSettings settings;
 
     ArrayAdapter<BookModel> bookArrayAdapter;
@@ -50,8 +51,9 @@ public class Library extends AppCompatActivity {
         l_main_layout.setBackgroundResource(id);
 
         dataBaseHelper = new DataBaseHelper(Library.this);
-        showCustomersOnListView(dataBaseHelper.getAllBooks());
+        showBooksOnRecyclerView(dataBaseHelper.getAllBooks());
 
+        // On click for search switches
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,15 +61,15 @@ public class Library extends AppCompatActivity {
                 String search = searchEntry.getText().toString();
                 if (titleSwitch.isChecked()) {
 //                    Toast.makeText(Library.this, "title checked", Toast.LENGTH_SHORT).show();
-                    showCustomersOnListView(dataBaseHelper.searchTitle(searchEntry.getText().toString()));
+                    showBooksOnRecyclerView(dataBaseHelper.searchTitle(searchEntry.getText().toString()));
                 }
                 else if (authorSwitch.isChecked()) {
 //                    Toast.makeText(Library.this, "author checked", Toast.LENGTH_SHORT).show();
-                    showCustomersOnListView(dataBaseHelper.searchAuthor(searchEntry.getText().toString()));
+                    showBooksOnRecyclerView(dataBaseHelper.searchAuthor(searchEntry.getText().toString()));
                 }
                 else if (isbnSwitch.isChecked()) {
 //                    Toast.makeText(Library.this, "isbn checked", Toast.LENGTH_SHORT).show();
-                    showCustomersOnListView(dataBaseHelper.searchISBN(searchEntry.getText().toString()));
+                    showBooksOnRecyclerView(dataBaseHelper.searchISBN(searchEntry.getText().toString()));
                 }
                 else {
                     Toast.makeText(Library.this, "Select title, author, or isbn", Toast.LENGTH_SHORT).show();
@@ -75,11 +77,12 @@ public class Library extends AppCompatActivity {
             }
         });
 
+        // On click for view all button
         viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // grabs everyone from the database
-                showCustomersOnListView(dataBaseHelper.getAllBooks());
+                showBooksOnRecyclerView(dataBaseHelper.getAllBooks());
             }
         });
     }
@@ -87,14 +90,14 @@ public class Library extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        showCustomersOnListView(dataBaseHelper.getAllBooks());
+        showBooksOnRecyclerView(dataBaseHelper.getAllBooks());
     }
 
     /**
-     *
-     * @param books
+     * Display all books in given list in recyclerView
+     * @param books List of books to display
      */
-    private void showCustomersOnListView(List<BookModel> books) {
+    private void showBooksOnRecyclerView(List<BookModel> books) {
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this);
 
         LibraryListAdapter libraryListAdapter = new LibraryListAdapter(books);

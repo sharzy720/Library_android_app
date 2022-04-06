@@ -13,11 +13,14 @@ import java.util.List;
 // TODO maybe breakout searching database onto its own thread
 
 /**
- *
+ * Helper class for dealing with the database
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
+    // Name of the book table
     public static final String BOOK_TABLE = "BOOK_TABLE";
+
+    // Name of each of the columns in the book table
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_BOOK_ISBN = " BOOK_ISBN";
     public static final String COLUMN_BOOK_TITLE = "BOOK_TITLE";
@@ -26,7 +29,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_MEDIUM_COVER = "MEDIUM_COVER";
     public static final String COLUMN_LARGE_COVER = "LARGE_COVER";
 
-
+    /**
+     *
+     * @param context
+     */
     public DataBaseHelper(@Nullable Context context) {
         super(context, "customer.db", null, 1);
     }
@@ -57,9 +63,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *
-     * @param bookModel
-     * @return
+     * Adding a book to the database
+     * @param bookModel Model of a book to add to the database
+     * @return If the inserting was successful or not
      */
     public boolean addBook(BookModel bookModel) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -81,9 +87,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *
-     * @param isbn
-     * @return
+     * Deleting a book with a matching isbn
+     * @param isbn Book isbn to search for
+     * @return If the deleting was successful or not
      */
     public boolean deleteBookByIsbn(String isbn) {
         // find BookModel in the database. if is found, delete it and return true.
@@ -103,9 +109,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *
-     * @param title
-     * @return
+     * Search the database for books that titles include the given title
+     * @param title Book title
+     * @return List of all matching books
      */
     public List<BookModel> searchTitle(String title) {
         List<BookModel> returnList = new ArrayList<>();
@@ -145,9 +151,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *
-     * @param author
-     * @return
+     * Search the database for books authors that include the given author
+     * @param author Book author
+     * @return List of all matching books
      */
     public List<BookModel> searchAuthor(String author) {
         List<BookModel> returnList = new ArrayList<>();
@@ -186,9 +192,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *
-     * @param isbn
-     * @return
+     * Search the database for books isbn that include the given isbn
+     * @param isbn Book isbn
+     * @return List of all matching books
      */
     public List<BookModel> searchISBN(String isbn) {
         List<BookModel> returnList = new ArrayList<>();
@@ -228,8 +234,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *
-     * @return
+     * Retrieves all the books in the database
+     * @return List of all books in database
      */
     public List<BookModel> getAllBooks() {
         List<BookModel> returnList = new ArrayList<>();
