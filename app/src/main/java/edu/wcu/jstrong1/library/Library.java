@@ -58,20 +58,19 @@ public class Library extends AppCompatActivity {
                 // call database search method depending on what switch is active
                 String search = searchEntry.getText().toString();
                 if (titleSwitch.isChecked()) {
-                    Toast.makeText(Library.this, "title checked", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Library.this, "title checked", Toast.LENGTH_SHORT).show();
                     showCustomersOnListView(dataBaseHelper.searchTitle(searchEntry.getText().toString()));
                 }
                 else if (authorSwitch.isChecked()) {
-                    Toast.makeText(Library.this, "author checked", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Library.this, "author checked", Toast.LENGTH_SHORT).show();
                     showCustomersOnListView(dataBaseHelper.searchAuthor(searchEntry.getText().toString()));
                 }
                 else if (isbnSwitch.isChecked()) {
-                    Toast.makeText(Library.this, "isbn checked", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Library.this, "isbn checked", Toast.LENGTH_SHORT).show();
                     showCustomersOnListView(dataBaseHelper.searchISBN(searchEntry.getText().toString()));
                 }
                 else {
-                    Toast.makeText(Library.this, "Select title, author, or isbn",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Library.this, "Select title, author, or isbn", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -83,6 +82,12 @@ public class Library extends AppCompatActivity {
                 showCustomersOnListView(dataBaseHelper.getAllBooks());
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showCustomersOnListView(dataBaseHelper.getAllBooks());
     }
 
     /**
