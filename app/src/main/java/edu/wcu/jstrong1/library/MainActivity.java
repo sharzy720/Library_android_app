@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the background
         settings = (AppSettings) getApplication();
+        settings.loadSettings();
         String background = settings.getAppColor();
         int id = getResources().getIdentifier(background, "drawable", this.getPackageName());
         mm_main_layout.setBackgroundResource(id);

@@ -67,5 +67,7 @@ public class SettingsPage extends AppCompatActivity implements View.OnClickListe
         String background = settings.getAppColor();
         int id = getResources().getIdentifier(background, "drawable", this.getPackageName());
         mainLayout.setBackgroundResource(id);
+
+        settings.saveSettings();
     }
 }
