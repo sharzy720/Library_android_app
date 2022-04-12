@@ -55,7 +55,6 @@ public class SettingsPage extends AppCompatActivity implements View.OnClickListe
         mainLayout.setBackgroundResource(id);
     }
 
-
     @Override
     public void onClick(View view) {
         if (view == redBut) {
