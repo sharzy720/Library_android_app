@@ -18,6 +18,13 @@ public class AppSettings extends Application {
     /** Name of file where settings are saved */
     String filename = "LibrarySavedSettings.txt";
 
+    public void exportDatabase() {
+
+    }
+
+    public void importDatabase() {
+
+    }
 
     public void saveSettings() {
         //Create a file if its not already on disk
