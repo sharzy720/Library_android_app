@@ -28,10 +28,11 @@
             android:layout_height="wrap_content" android:id="@+id/bd_isbn"
             android:layout_below="@id/bd_author" android:layout_alignStart="@id/bd_cover"/>
     <androidx.appcompat.widget.AppCompatButton
+            style="@style/default_button"
             android:text="Delete Book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/bd_delete_but"
             android:layout_below="@id/bd_isbn" android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp" android:background="@drawable/button_style1"
+            android:layout_marginTop="20dp"
             android:paddingStart="20dp" android:paddingEnd="20dp"/>
 </RelativeLayout>

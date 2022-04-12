@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent" android:weightSum="10"
-              android:background="@drawable/blue_gradient" android:id="@+id/l_main_layout">
+              android:background="@color/apple_blue_light" android:id="@+id/l_main_layout">
 
     <EditText
             android:layout_width="match_parent"
@@ -17,22 +18,35 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp" android:weightSum="3" android:layout_weight="0.75"
-            android:layout_marginStart="10dp" android:layout_marginEnd="10dp">
-        <Switch
+            android:layout_marginStart="@dimen/side_padding"
+            android:layout_marginEnd="@dimen/side_padding">
+        <androidx.appcompat.widget.SwitchCompat
                 android:text="Title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" android:id="@+id/l_title_switch"
-                android:layout_weight="1" android:minHeight="48dp"/>
-        <Switch
+                android:layout_weight="1" android:minHeight="48dp"
+                android:thumb="@drawable/thumb1"
+                app:track="@drawable/track"
+                android:paddingStart="@dimen/side_padding"
+                android:paddingEnd="@dimen/side_padding"/>
+        <androidx.appcompat.widget.SwitchCompat
                 android:text="Author"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" android:id="@+id/l_author_switch"
-                android:layout_weight="1" android:minHeight="48dp"/>
-        <Switch
+                android:layout_weight="1" android:minHeight="48dp"
+                android:thumb="@drawable/thumb1"
+                app:track="@drawable/track"
+                android:paddingEnd="@dimen/side_padding"
+                android:paddingStart="@dimen/side_padding"/>
+        <androidx.appcompat.widget.SwitchCompat
                 android:text="ISBN"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" android:id="@+id/l_isbn_switch"
-                android:layout_weight="1" android:minHeight="48dp"/>
+                android:layout_weight="1" android:minHeight="48dp"
+                android:thumb="@drawable/thumb1"
+                app:track="@drawable/track"
+                android:paddingEnd="@dimen/side_padding"
+                android:paddingStart="@dimen/side_padding"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
@@ -40,22 +54,26 @@
             android:layout_height="0dp" android:weightSum="2" android:layout_weight="1"
             android:layout_marginStart="10dp" android:layout_marginEnd="10dp">
         <androidx.appcompat.widget.AppCompatButton
+                style="@style/default_button"
                 android:text="Search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/l_search_but"
                 android:layout_weight="1"
-                android:layout_marginEnd="10dp" android:background="@drawable/button_style1"/>
+                android:layout_marginEnd="10dp"
+        />
         <androidx.appcompat.widget.AppCompatButton
+                style="@style/default_button"
                 android:text="View All"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/l_view_all_but"
                 android:layout_weight="1" android:layout_marginStart="10dp"
-                android:background="@drawable/button_style1"/>
+        />
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="0dp" android:layout_weight="7.25">
+            android:layout_height="0dp" android:layout_weight="7.25"
+    >
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

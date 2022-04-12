@@ -2,8 +2,8 @@ package edu.wcu.jstrong1.library;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.io.*;
 
@@ -15,8 +15,16 @@ public class AppSettings extends Application {
     /** Drawable name for the app's current background theme */
     private String appColor = "blue_gradient";
 
+    /** Name of file where settings are saved */
     String filename = "LibrarySavedSettings.txt";
 
+    public void exportDatabase() {
+
+    }
+
+    public void importDatabase() {
+
+    }
 
     public void saveSettings() {
         //Create a file if its not already on disk
@@ -59,10 +67,8 @@ public class AppSettings extends Application {
         //Read text from file
         StringBuilder text = new StringBuilder();
 
-
         //Needs lots of try and catch blocks because so much can go wron
         try{
-
             BufferedReader br = new BufferedReader(new FileReader(extDir));
             String line;
 
@@ -84,7 +90,6 @@ public class AppSettings extends Application {
             e.printStackTrace();
         }//end catch
 
-
         //Set the data from the file content and conver it to a String
         String data = new String(text);
 
@@ -93,6 +98,7 @@ public class AppSettings extends Application {
 
             //put the loaded data into the text view
             appColor = data.replace("\n","");
+            checkMode();
         }
         else
             Toast.makeText(this, "There is no data to display", Toast.LENGTH_LONG).show();
@@ -104,8 +110,29 @@ public class AppSettings extends Application {
      * Set the background theme
      * @param color String of a color [red, green, blue, orange, purple]
      */
-    public void setAppColor(String color) {
+    public void setAppGradient(String color) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         this.appColor = color + "_gradient";
+        checkMode();
+    }
+
+    public void setDarkMode(boolean mode) {
+        if (mode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            this.appColor = "dark_mode";
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            this.appColor = "light_mode";
+        }
+    }
+
+    private void checkMode() {
+        if (appColor.contains("red") || appColor.contains("blue") || appColor.contains("orange") ||
+                appColor.contains("purple") || appColor.contains("dark")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     /**

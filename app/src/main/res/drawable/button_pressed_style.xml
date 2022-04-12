@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <!--            old endColor: #DD000000
+                            old angle: 315-->
+            <!--                android:endColor="@color/trans_dk_grey"-->
+            <!--                android:centerColor="@color/trans_grey"-->
+            <!--                android:startColor="@color/trans_dk_grey"-->
+            <gradient
+                    android:endColor="@color/apple_gray1_trans"
+                    android:centerColor="@color/apple_dark_gray3_trans"
+                    android:startColor="@color/apple_gray1_trans"
+                    android:angle="0" />
+            <stroke
+                    android:width="3dp"
+                    android:color="@color/black"/>
+            <corners
+                    android:radius="5dp" />
+        </shape>
+    </item>
+</selector>

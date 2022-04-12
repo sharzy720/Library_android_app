@@ -17,6 +17,8 @@ public class SettingsPage extends AppCompatActivity implements View.OnClickListe
     private Button blueBut;
     private Button orangeBut;
     private Button purpleBut;
+    private Button lightModeBut;
+    private Button darkModeBut;
 
     /** App's application class */
     private AppSettings settings;
@@ -34,6 +36,8 @@ public class SettingsPage extends AppCompatActivity implements View.OnClickListe
         blueBut = findViewById(R.id.sp_blue_but);
         orangeBut = findViewById(R.id.sp_orange_but);
         purpleBut = findViewById(R.id.sp_purple_but);
+        lightModeBut = findViewById(R.id.sp_light_but);
+        darkModeBut = findViewById(R.id.sp_dark_but);
         mainLayout = findViewById(R.id.sp_main_layout);
 
         settings = (AppSettings) getApplication();
@@ -43,25 +47,30 @@ public class SettingsPage extends AppCompatActivity implements View.OnClickListe
         blueBut.setOnClickListener(this);
         orangeBut.setOnClickListener(this);
         purpleBut.setOnClickListener(this);
+        lightModeBut.setOnClickListener(this);
+        darkModeBut.setOnClickListener(this);
 
         String background = settings.getAppColor();
         int id = getResources().getIdentifier(background, "drawable", this.getPackageName());
         mainLayout.setBackgroundResource(id);
     }
 
-
     @Override
     public void onClick(View view) {
         if (view == redBut) {
-            settings.setAppColor("red");
+            settings.setAppGradient("red");
         } else if (view == greenBut) {
-            settings.setAppColor("green");
+            settings.setAppGradient("green");
         } else if (view == blueBut) {
-            settings.setAppColor("blue");
+            settings.setAppGradient("blue");
         } else if (view == orangeBut) {
-            settings.setAppColor("orange");
+            settings.setAppGradient("orange");
         } else if (view == purpleBut) {
-            settings.setAppColor("purple");
+            settings.setAppGradient("purple");
+        } else if (view == lightModeBut) {
+            settings.setDarkMode(false);
+        } else if (view == darkModeBut) {
+            settings.setDarkMode(true);
         }
 
         String background = settings.getAppColor();
