@@ -5,11 +5,13 @@
         <shape>
 <!--            old endColor: #DD000000
                 old angle: 315-->
+            <!--                android:endColor="@color/trans_dk_grey"-->
+            <!--                android:centerColor="@color/trans_grey"-->
+            <!--                android:startColor="@color/trans_dk_grey"-->
             <gradient
-
-                android:endColor="@color/trans_dk_grey"
-                android:centerColor="@color/trans_grey"
-                android:startColor="@color/trans_dk_grey"
+            android:endColor="@color/apple_dark_gray3_trans"
+            android:centerColor="@color/apple_gray1_trans"
+            android:startColor="@color/apple_dark_gray3_trans"
                 android:angle="0" />
             <stroke
                 android:width="3dp"
