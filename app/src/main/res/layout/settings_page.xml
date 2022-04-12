@@ -5,22 +5,23 @@
                 android:id="@+id/sp_main_layout">
 
     <TextView
+            style="@style/title"
             android:text="Settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView"
-            android:layout_centerHorizontal="true" android:textSize="48sp"
-            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
     />
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_centerInParent="true"
-            android:layout_marginStart="10dp" android:layout_marginEnd="10dp">
+            android:layout_marginStart="@dimen/side_padding" android:layout_marginEnd="@dimen/side_padding">
         <TextView
+                style="@style/subtitle"
                 android:text="Select app theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/textView2"
-                android:textSize="24sp" android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
         />
         <LinearLayout
                 android:orientation="horizontal"
@@ -29,21 +30,27 @@
                 android:id="@+id/color_select_row1"
                 android:layout_marginTop="5dp">
             <androidx.appcompat.widget.AppCompatButton
+                    style="@style/default_button"
                     android:text="Red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_red_but"
-                    android:layout_weight="1" android:background="@drawable/button_style1"/>
+                    android:layout_weight="1"
+            />
             <androidx.appcompat.widget.AppCompatButton
+                    style="@style/default_button"
                     android:text="Green"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_green_but"
-                    android:layout_weight="1" android:background="@drawable/button_style1"
-                    android:layout_marginStart="5dp" android:layout_marginEnd="5dp"/>
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp" android:layout_marginEnd="5dp"
+            />
             <androidx.appcompat.widget.AppCompatButton
+                    style="@style/default_button"
                     android:text="Blue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_blue_but"
-                    android:layout_weight="1" android:background="@drawable/button_style1"/>
+                    android:layout_weight="1"
+            />
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -51,16 +58,19 @@
                 android:layout_height="wrap_content" android:id="@+id/color_select_row2"
                 android:layout_marginTop="5dp" android:layout_marginBottom="5dp">
             <androidx.appcompat.widget.AppCompatButton
+                    style="@style/default_button"
                     android:text="Orange"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_orange_but"
-                    android:layout_weight="1" android:background="@drawable/button_style1"
+                    android:layout_weight="1"
                     android:layout_marginEnd="5dp"/>
             <androidx.appcompat.widget.AppCompatButton
+                    style="@style/default_button"
                     android:text="Purple"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_purple_but"
-                    android:layout_weight="1" android:background="@drawable/button_style1"/>
+                    android:layout_weight="1"
+            />
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -68,16 +78,19 @@
                 android:layout_height="match_parent" android:id="@+id/color_select_row3"
         >
             <androidx.appcompat.widget.AppCompatButton
+                    style="@style/default_button"
                     android:text="Light Mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_light_but"
-                    android:layout_weight="1" android:background="@drawable/button_style1"
+                    android:layout_weight="1"
                     android:layout_marginEnd="5dp"/>
             <androidx.appcompat.widget.AppCompatButton
+                    style="@style/default_button"
                     android:text="Dark Mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_dark_but"
-                    android:layout_weight="1" android:background="@drawable/button_style1"/>
+                    android:layout_weight="1"
+            />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
