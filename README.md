@@ -1,8 +1,50 @@
 # Library_android_app
-This is an android app that allows for you to catalog your collection of books.
 
-Your library is easily accessed through the view books button where all of the books in the database are displayed. By entering either a title, author, or isbn number and selecting the respective switch you can search the library. Selecting a book will bring up the details page where all the information about a given book is displayed, this is also where you can delete a book from your library.
+An android app that allows for you to simply catalog your book collection.
 
-Adding a book to your library is simple all you do is press the add book button and enter the books isbn number and press search. The app will then search the [Open Library database](https://openlibrary.org/developers/api) for relevent information like the books title, author, and cover. To add the book to the library simply press the add to library button.
+## Key Features
 
-App now supports themes. In the settings pages there are a few app themes to choose from.
+---
+
+* Book details are pulled from the [OpenLibrary API](https://openlibrary.org/developers/api)
+* Saved books are stored in a local SQLite database
+* Personal library can be searched by title, author, or isbn
+* A book can be removed from the collection on its detail page
+* Multithreading is used to speed up retrieving book details from the internet
+
+## How to use
+
+---
+
+#### To add a book to the library:
+
+Press the 'Add Book' button. Entering the books isbn and pressing search will search the 
+OpenLibrary api for details about the given book. To add the book to the library simple press 
+the 'Add to library' button.
+
+#### Search book collection:
+
+Once you are on the collection page searching is easy. Simple enter the title, author, or isbn 
+you want to search for. Then select the respective switch followed by the search button. If you 
+want to return to viewing all the books in the collection simply press the 'View all' button.
+
+## Credits:
+
+---
+
+This software uses the following open source packages:
+
+* [Glide](https://github.com/bumptech/glide)
+* [Gson](https://github.com/google/gson)
+
+## Author:
+
+---
+
+Johnathyn Strong - [@sharzy720](https://github.com/sharzy720) on GitHub, [@sharzy720](https://twitter.com/sharzy720) on Twitter
+
+## License:
+
+---
+
+Licensed under the [MIT License](LICENSE)
