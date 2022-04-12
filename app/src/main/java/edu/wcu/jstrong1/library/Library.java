@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +17,9 @@ import java.util.List;
 public class Library extends AppCompatActivity {
 
     private EditText searchEntry;
-    private Switch titleSwitch;
-    private Switch authorSwitch;
-    private Switch isbnSwitch;
+    private SwitchCompat titleSwitch;
+    private SwitchCompat authorSwitch;
+    private SwitchCompat isbnSwitch;
     private Button search;
     private Button viewAll;
     private RecyclerView bookList;
