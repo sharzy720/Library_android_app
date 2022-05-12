@@ -1,9 +1,11 @@
 package edu.wcu.jstrong1.library;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -59,11 +61,37 @@ public class BookDetails extends AppCompatActivity {
         deleteBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataBaseHelper dataBaseHelper = new DataBaseHelper(BookDetails.this);
-                dataBaseHelper.deleteBookByIsbn(extras.getString("isbn"));
-                Toast.makeText(BookDetails.this, "Book deleted!", Toast.LENGTH_SHORT).show();
+                deleteBookWarning(extras.getString("isbn"));
             }
         });
 
+    }
+
+    /**
+     * Displays a warning when the user presses the delete button
+     * @param isbn Isbn of book to be removed from the database
+     */
+    private void deleteBookWarning(String isbn) {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        DataBaseHelper dataBaseHelper = new DataBaseHelper(BookDetails.this);
+                        dataBaseHelper.deleteBookByIsbn(isbn);
+                        Toast.makeText(BookDetails.this, "Book deleted!", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
     }
 }
