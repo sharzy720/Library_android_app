@@ -24,20 +24,20 @@
                 android:text="VIew Books"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/mm_view_books_but"
-        />
+                android:layout_marginBottom="5dp"/>
         <androidx.appcompat.widget.AppCompatButton
                 style="@style/default_button"
                 android:text="Add Book"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/mm_add_book_but"
                 android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
-        />
+                android:visibility="gone"/>
         <androidx.appcompat.widget.AppCompatButton
                 style="@style/default_button"
                 android:text="Settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/mm_settings_but"
-        />
+                android:layout_marginTop="5dp"/>
     </LinearLayout>
 
 </RelativeLayout>
