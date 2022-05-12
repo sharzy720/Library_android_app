@@ -6,7 +6,7 @@
 
     <TextView
             style="@style/title"
-            android:text="Settings"
+            android:text="@string/s_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView"
             android:layout_centerHorizontal="true"
@@ -18,7 +18,7 @@
             android:layout_marginStart="@dimen/side_padding" android:layout_marginEnd="@dimen/side_padding">
         <TextView
                 style="@style/subtitle"
-                android:text="Select app theme"
+                android:text="@string/s_themes_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/textView2"
                 android:layout_gravity="center_horizontal"
@@ -31,14 +31,14 @@
                 android:layout_marginTop="5dp">
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
-                    android:text="Red"
+                    android:text="@string/s_theme_but1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_red_but"
                     android:layout_weight="1"
             />
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
-                    android:text="Green"
+                    android:text="@string/s_theme_but2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_green_but"
                     android:layout_weight="1"
@@ -46,7 +46,7 @@
             />
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
-                    android:text="Blue"
+                    android:text="@string/s_theme_but3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_blue_but"
                     android:layout_weight="1"
@@ -59,14 +59,14 @@
                 android:layout_marginTop="5dp" android:layout_marginBottom="5dp">
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
-                    android:text="Orange"
+                    android:text="@string/s_theme_but4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_orange_but"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"/>
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
-                    android:text="Purple"
+                    android:text="@string/s_theme_but5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_purple_but"
                     android:layout_weight="1"
@@ -79,14 +79,14 @@
         >
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
-                    android:text="Light Mode"
+                    android:text="@string/s_theme_but6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_light_but"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"/>
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
-                    android:text="Dark Mode"
+                    android:text="@string/s_theme_but7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_dark_but"
                     android:layout_weight="1"

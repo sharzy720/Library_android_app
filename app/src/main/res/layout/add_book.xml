@@ -12,7 +12,7 @@
             android:ems="10"
             android:id="@+id/ab_isbn_entry" android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp" android:layout_marginTop="50dp"
-            android:hint="ISBN" android:minHeight="48dp"/>
+            android:hint="@string/ab_search_hint" android:minHeight="48dp"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -21,14 +21,14 @@
             android:layout_marginEnd="@dimen/side_padding">
         <androidx.appcompat.widget.AppCompatButton
                 style="@style/default_button"
-                android:text="Search"
+                android:text="@string/ab_search_but"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/ab_search_but"
                 android:layout_weight="1" android:layout_marginEnd="10dp"
         />
         <androidx.appcompat.widget.AppCompatButton
                 style="@style/default_button"
-                android:text="Add to Library"
+                android:text="@string/ab_add_but"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/ab_add_but"
                 android:layout_weight="1" android:layout_marginStart="10dp"
