@@ -80,10 +80,20 @@ public class AddBook extends AppCompatActivity {
 //                String isbn = "9781501120602";
                     pj.setIsbn(isbn);
                     try {
-                        new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
-                    } catch (ExecutionException | InterruptedException e) {
+//                        new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
+                        JsonTaskThread jsonTaskThread = new JsonTaskThread();
+                        jsonTaskThread.setJsonUrl("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json");
+                        Thread thread = new Thread(jsonTaskThread);
+                        thread.start();
+                        thread.join();
+                        pj = jsonTaskThread.getPj();
+                    } catch (InterruptedException e) { // ExecutionException |
                         e.printStackTrace();
                     }
+                    pj.setIsbn(isbn);
+                    setBookCover(AddBook.this.pj.getMediumCoverURL(), bookCover);
+                    bookTitle.setText("Title: " + AddBook.this.pj.getTitleString());
+                    bookAuthor.setText("Author: " + AddBook.this.pj.getAuthorString());
                     // search api for book with matching isbn
                 } else {
                     isbnEntry.setError("Enter valid isbn-10 or isbn-13");
@@ -108,8 +118,14 @@ public class AddBook extends AppCompatActivity {
 //                        isbn = "9781501120602";
                         String test;
                         try {
-                            test = new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
-                        } catch (ExecutionException | InterruptedException e) {
+//                            test = new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
+                            JsonTaskThread jsonTaskThread = new JsonTaskThread();
+                            jsonTaskThread.setJsonUrl("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json");
+                            Thread thread = new Thread(jsonTaskThread);
+                            thread.start();
+                            thread.join();
+                            pj = jsonTaskThread.getPj();
+                        } catch (InterruptedException e) { // ExecutionException |
                             e.printStackTrace();
                         }
                         pj.setIsbn(isbn);
