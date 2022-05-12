@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/color_select_row1"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="@dimen/button_top_padding">
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
                     android:text="@string/s_theme_but1"
@@ -42,7 +42,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_green_but"
                     android:layout_weight="1"
-                    android:layout_marginStart="5dp" android:layout_marginEnd="5dp"
+                    android:layout_marginStart="@dimen/button_start_padding"
+                    android:layout_marginEnd="@dimen/button_end_padding"
             />
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
@@ -56,14 +57,15 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/color_select_row2"
-                android:layout_marginTop="5dp" android:layout_marginBottom="5dp">
+                android:layout_marginTop="@dimen/button_top_padding"
+                android:layout_marginBottom="@dimen/button_bottom_padding">
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
                     android:text="@string/s_theme_but4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_orange_but"
                     android:layout_weight="1"
-                    android:layout_marginEnd="5dp"/>
+                    android:layout_marginEnd="@dimen/button_end_padding"/>
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
                     android:text="@string/s_theme_but5"
@@ -83,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sp_light_but"
                     android:layout_weight="1"
-                    android:layout_marginEnd="5dp"/>
+                    android:layout_marginEnd="@dimen/button_end_padding"/>
             <androidx.appcompat.widget.AppCompatButton
                     style="@style/default_button"
                     android:text="@string/s_theme_but7"

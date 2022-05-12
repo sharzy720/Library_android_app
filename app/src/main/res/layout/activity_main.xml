@@ -24,7 +24,7 @@
                 android:text="@string/mm_but1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/mm_view_books_but"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="@dimen/button_bottom_padding"/>
         <androidx.appcompat.widget.AppCompatButton
                 style="@style/default_button"
                 android:text="Add Book"
@@ -37,7 +37,7 @@
                 android:text="@string/mm_but2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/mm_settings_but"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="@dimen/button_top_padding"/>
     </LinearLayout>
 
 </RelativeLayout>

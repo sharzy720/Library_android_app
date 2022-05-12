@@ -10,28 +10,28 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/ab_isbn_entry" android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" android:layout_marginTop="50dp"
+            android:id="@+id/ab_isbn_entry" android:layout_marginStart="@dimen/start_padding"
+            android:layout_marginEnd="@dimen/end_padding" android:layout_marginTop="50dp"
             android:hint="@string/ab_search_hint" android:minHeight="48dp"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_below="@id/ab_isbn_entry"
-            android:id="@+id/ab_buts" android:layout_marginStart="@dimen/side_padding"
-            android:layout_marginEnd="@dimen/side_padding">
+            android:id="@+id/ab_buts" android:layout_marginStart="@dimen/start_padding"
+            android:layout_marginEnd="@dimen/end_padding">
         <androidx.appcompat.widget.AppCompatButton
                 style="@style/default_button"
                 android:text="@string/ab_search_but"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/ab_search_but"
-                android:layout_weight="1" android:layout_marginEnd="10dp"
+                android:layout_weight="1" android:layout_marginEnd="@dimen/button_end_padding"
         />
         <androidx.appcompat.widget.AppCompatButton
                 style="@style/default_button"
                 android:text="@string/ab_add_but"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/ab_add_but"
-                android:layout_weight="1" android:layout_marginStart="10dp"
+                android:layout_weight="1" android:layout_marginStart="@dimen/button_start_padding"
         />
     </LinearLayout>
     <ImageView
@@ -42,9 +42,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/ab_book_title"
             android:layout_below="@id/ab_book_cover" android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp" android:layout_alignStart="@id/ab_book_cover"/>
+            android:layout_marginTop="50dp" android:layout_alignStart="@id/ab_book_cover"
+    />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/ab_book_author"
-            android:layout_below="@id/ab_book_title" android:layout_alignStart="@id/ab_book_title"/>
+            android:layout_below="@id/ab_book_title" android:layout_alignStart="@id/ab_book_title"
+    />
 </RelativeLayout>
