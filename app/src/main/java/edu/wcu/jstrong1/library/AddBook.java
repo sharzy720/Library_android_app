@@ -72,15 +72,22 @@ public class AddBook extends AppCompatActivity {
             public void onClick(View view) {
 //                Toast.makeText(AddBook.this, "Search clicked", Toast.LENGTH_SHORT).show();
                 String isbn = isbnEntry.getText().toString();
-                // test isbn
+                if (isbn.length() == 9 || isbn.length() == 10 || isbn.length() == 13) {
+                    if (isbn.length() == 9) {
+                        isbn = isbn + "X";
+                    }
+                    // test isbn
 //                String isbn = "9781501120602";
-                pj.setIsbn(isbn);
-                try {
-                    new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
-                } catch (ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
+                    pj.setIsbn(isbn);
+                    try {
+                        new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    // search api for book with matching isbn
+                } else {
+                    isbnEntry.setError("Enter valid isbn-10 or isbn-13");
                 }
-                // search api for book with matching isbn
             }
         });
 
