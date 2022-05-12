@@ -1,6 +1,7 @@
 package edu.wcu.jstrong1.library;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -81,6 +82,7 @@ public class BookDetails extends AppCompatActivity {
                         DataBaseHelper dataBaseHelper = new DataBaseHelper(BookDetails.this);
                         dataBaseHelper.deleteBookByIsbn(isbn);
                         Toast.makeText(BookDetails.this, "Book deleted!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(BookDetails.this, Library.class));
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
