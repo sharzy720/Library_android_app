@@ -69,14 +69,22 @@
                 android:layout_weight="1" android:layout_marginStart="10dp"
         />
     </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp" android:layout_weight="7.25"
     >
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/l_book_list"/>
-    </LinearLayout>
+                android:id="@+id/l_book_list">
+        </androidx.recyclerview.widget.RecyclerView>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true" app:srcCompat="@android:drawable/ic_input_add"
+                android:id="@+id/l_add_book_but" android:layout_weight="1"
+                android:layout_alignParentBottom="true" android:layout_alignParentRight="true"
+                android:layout_marginEnd="20dp" android:layout_marginBottom="20dp"
+                app:backgroundTint="@color/white"/>
+    </RelativeLayout>
 </LinearLayout>
