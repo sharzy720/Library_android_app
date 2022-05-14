@@ -119,7 +119,8 @@ public class ParseJson extends Application {
 
             titleString = title.getAsString();
             authorString = author.getAsString();
-            numOfPages = numberOfPages.getAsString();
+//            numOfPages = numberOfPages.getAsString();
+            numOfPages = checkNumPagesElement(numberOfPages);
 
             if (titleString != null || !(titleString.equals(""))) {
                 validBook = true;
@@ -132,6 +133,19 @@ public class ParseJson extends Application {
             Log.v("strong", "Medium cover: " + mediumCoverURL);
             Log.v("strong", "Small cover: " + smallCoverURL);
             break;
+        }
+    }
+
+    /**
+     * Checks if the given json element is null or not
+     * @param numPages jsonElement for number of pages
+     * @return if jsonElement is null then "null", else number of pages
+     */
+    private String checkNumPagesElement(JsonElement numPages) {
+        if (numPages == null) {
+            return "null";
+        } else {
+            return numPages.getAsString();
         }
     }
 
