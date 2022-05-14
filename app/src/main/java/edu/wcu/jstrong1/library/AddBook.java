@@ -1,13 +1,17 @@
 package edu.wcu.jstrong1.library;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -28,6 +32,9 @@ public class AddBook extends AppCompatActivity {
     private EditText isbnEntry;
     private Button search;
     private Button addToLibrary;
+
+    private FloatingActionButton helpBut;
+
     private ImageView bookCover;
     private TextView bookTitle;
     private TextView bookAuthor;
@@ -50,6 +57,7 @@ public class AddBook extends AppCompatActivity {
         isbnEntry = findViewById(R.id.ab_isbn_entry);
         search = findViewById(R.id.ab_search_but);
         addToLibrary = findViewById(R.id.ab_add_but);
+        helpBut = findViewById(R.id.ab_help_but);
         bookCover = findViewById(R.id.ab_book_cover);
         bookTitle = findViewById(R.id.ab_book_title);
         bookAuthor = findViewById(R.id.ab_book_author);
@@ -72,15 +80,32 @@ public class AddBook extends AppCompatActivity {
             public void onClick(View view) {
 //                Toast.makeText(AddBook.this, "Search clicked", Toast.LENGTH_SHORT).show();
                 String isbn = isbnEntry.getText().toString();
-                // test isbn
+                if (isbn.length() == 9 || isbn.length() == 10 || isbn.length() == 13) {
+                    if (isbn.length() == 9) {
+                        isbn = isbn + "X";
+                    }
+                    // test isbn
 //                String isbn = "9781501120602";
-                pj.setIsbn(isbn);
-                try {
-                    new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
-                } catch (ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
+                    pj.setIsbn(isbn);
+                    try {
+//                        new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
+                        JsonTaskThread jsonTaskThread = new JsonTaskThread();
+                        jsonTaskThread.setJsonUrl("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json");
+                        Thread thread = new Thread(jsonTaskThread);
+                        thread.start();
+                        thread.join();
+                        pj = jsonTaskThread.getPj();
+                    } catch (InterruptedException e) { // ExecutionException |
+                        e.printStackTrace();
+                    }
+                    pj.setIsbn(isbn);
+                    setBookCover(AddBook.this.pj.getMediumCoverURL(), bookCover);
+                    bookTitle.setText("Title: " + AddBook.this.pj.getTitleString());
+                    bookAuthor.setText("Author: " + AddBook.this.pj.getAuthorString());
+                    // search api for book with matching isbn
+                } else {
+                    isbnEntry.setError("Enter valid isbn-10 or isbn-13");
                 }
-                // search api for book with matching isbn
             }
         });
 
@@ -101,8 +126,14 @@ public class AddBook extends AppCompatActivity {
 //                        isbn = "9781501120602";
                         String test;
                         try {
-                            test = new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
-                        } catch (ExecutionException | InterruptedException e) {
+//                            test = new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
+                            JsonTaskThread jsonTaskThread = new JsonTaskThread();
+                            jsonTaskThread.setJsonUrl("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json");
+                            Thread thread = new Thread(jsonTaskThread);
+                            thread.start();
+                            thread.join();
+                            pj = jsonTaskThread.getPj();
+                        } catch (InterruptedException e) { // ExecutionException |
                             e.printStackTrace();
                         }
                         pj.setIsbn(isbn);
@@ -135,6 +166,32 @@ public class AddBook extends AppCompatActivity {
 //                showCustomersOnListView();
                     Log.v("strong", "pj value in AddBook: " + pj.toString());
                 }
+            }
+        });
+
+        helpBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddBook.this);
+                builder.setMessage("To Search for a book enter its isbn.\n If the isbn ends with an X leave it off.")
+                       .setPositiveButton("Ok", dialogClickListener)
+//                       .setNegativeButton("No", dialogClickListener)
+                       .show();
             }
         });
     }

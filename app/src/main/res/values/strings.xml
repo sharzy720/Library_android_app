@@ -1,5 +1,38 @@
 <resources>
     <string name="app_name">Library</string>
+
+<!--Main menu Strings-->
+    <string name="mm_but1">View Books</string>
+    <string name="mm_but2">Settings</string>
+
+<!--Settings page Strings-->
+    <string name="s_title">Settings</string>
+    <string name="s_themes_header">Select app theme</string>
+    <string name="s_theme_but1">Red</string>
+    <string name="s_theme_but2">Green</string>
+    <string name="s_theme_but3">Blue</string>
+    <string name="s_theme_but4">Orange</string>
+    <string name="s_theme_but5">Purple</string>
+    <string name="s_theme_but6">Light Mode</string>
+    <string name="s_theme_but7">Dark Mode</string>
+
+<!--Library page Strings-->
+    <string name="l_search_hint">title, author, or isbn</string>
+    <string name="l_search_tab1">Title</string>
+    <string name="l_search_tab2">Author</string>
+    <string name="l_search_tab3">ISBN</string>
+    <string name="l_search_but">Search</string>
+    <string name="l_view_all_but">View All</string>
+
+<!--Add book page Strings-->
+    <string name="ab_search_hint">ISBN</string>
+    <string name="ab_search_but">Search</string>
+    <string name="ab_add_but">Add To Library</string>
+
+<!--Book details page String-->
+    <string name="bd_delete_but">Delete Book</string>
+
+<!--General Strings-->
     <string name="title_text">Title: </string>
     <string name="author_text">Author: </string>
     <string name="isbn_text">Isbn: </string>

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -22,6 +23,9 @@ public class Library extends AppCompatActivity {
     private SwitchCompat isbnSwitch;
     private Button search;
     private Button viewAll;
+
+    private FloatingActionButton addBook;
+
     private RecyclerView bookList;
     private LinearLayout l_main_layout;
 
@@ -42,6 +46,7 @@ public class Library extends AppCompatActivity {
         isbnSwitch = findViewById(R.id.l_isbn_switch);
         search = findViewById(R.id.l_search_but);
         viewAll = findViewById(R.id.l_view_all_but);
+        addBook = findViewById(R.id.l_add_book_but);
         bookList = findViewById(R.id.l_book_list);
         l_main_layout = findViewById(R.id.l_main_layout);
 
@@ -54,7 +59,7 @@ public class Library extends AppCompatActivity {
         dataBaseHelper = new DataBaseHelper(Library.this);
         showBooksOnRecyclerView(dataBaseHelper.getAllBooks());
 
-        // On click for search switches
+        // On click for searching the library by, title, author, or isbn
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +89,14 @@ public class Library extends AppCompatActivity {
             public void onClick(View view) {
                 // grabs everyone from the database
                 showBooksOnRecyclerView(dataBaseHelper.getAllBooks());
+            }
+        });
+
+        // On click for adding a new book to the library
+        addBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Library.this, AddBook.class));
             }
         });
     }
