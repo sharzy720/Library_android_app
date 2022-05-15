@@ -46,10 +46,14 @@ public class ParseJson extends Application {
 //        this.largeCoverURL = null;
     }
 
+    /**
+     * Find a book using its isbn
+     * @param isbn Book's isbn
+     */
     public void retrieveBook(String isbn) {
         String sURL = "https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json";
         // Connect to the URL using java's native library
-        URL url = null;
+        URL url;
         URLConnection request = null;
         try {
             url = new URL(sURL);
@@ -67,6 +71,7 @@ public class ParseJson extends Application {
 //        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
         InputStream stream = null;
         try {
+            assert request != null;
             stream = request.getInputStream();
         } catch (IOException e) {
             e.printStackTrace();
@@ -88,7 +93,7 @@ public class ParseJson extends Application {
      * @param root Top JsonElement
      */
     public void getBookDetails(JsonElement root) {
-        JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
+        JsonObject rootobj = root.getAsJsonObject(); //Maybe an array, maybe an object.
         JsonObject records = (JsonObject) rootobj.get("records"); //just grab the zipcode
         Set<Map.Entry<String, JsonElement>> entrySet = records.entrySet();
 
@@ -135,13 +140,13 @@ public class ParseJson extends Application {
         }
     }
 
-    public void parseFromString(String json) {
-//        Gson g = new Gson();
-//        JsonElement root = g.toJsonTree(json);
-        JsonObject rootobj = new JsonParser().parse(json).getAsJsonObject();
-//        getBookDetails(rootobj);
-        Log.v("strong", "reached parseFromString");
-    }
+//    public void parseFromString(String json) {
+////        Gson g = new Gson();
+////        JsonElement root = g.toJsonTree(json);
+//        JsonObject rootobj = new JsonParser().parse(json).getAsJsonObject();
+////        getBookDetails(rootobj);
+//        Log.v("strong", "reached parseFromString");
+//    }
 
     @Override
     public String toString() {
@@ -159,38 +164,78 @@ public class ParseJson extends Application {
 
     // Getters and Setters
 
+    /**
+     * Return if the book is valid or not
+     * @return True if the book is valid else false
+     */
     public Boolean getValidBook() {
         return validBook;
     }
 
+    /**
+     * Set whether the book is valid or not
+     * @param validBook True if the book is valid else false
+     */
     public void setValidBook(Boolean validBook) {
         this.validBook = validBook;
     }
 
+    /**
+     * Get a book's isbn
+     * @return Book's isbn
+     */
     public String getIsbn() { return isbn; }
 
+    /**
+     * Set a book's isbn
+     * @param newIsbn Book's new isbn
+     */
     public void setIsbn(String newIsbn) { isbn = newIsbn; }
 
+    /**
+     * Get a book's title
+     * @return Book's title
+     */
     public String getTitleString() {
         return titleString;
     }
 
+    /**
+     * Get a book's author
+     * @return Book's author
+     */
     public String getAuthorString() {
         return authorString;
     }
 
+    /**
+     * Get a book's number of pages
+     * @return
+     */
     public String getNumOfPages() {
         return numOfPages;
     }
 
+    /**
+     * Get url for the small version of a book's cover image
+     * @return Url for small version of a book's cover
+     */
     public String getSmallCoverURL() {
         return smallCoverURL;
     }
 
+    /**
+     * Get url for the medium version of a book's cover image
+     * @return Url for medium version of a book's cover
+     */
     public String getMediumCoverURL() {
         return mediumCoverURL;
     }
 
+    /**
+     * Get url for the large version of a book's cover image
+     * @return Url for large version of a book's cover
+     */
     public String getLargeCoverURL() {
         return largeCoverURL;
     }

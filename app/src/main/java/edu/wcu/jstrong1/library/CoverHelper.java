@@ -50,8 +50,6 @@ public class CoverHelper extends AppCompatActivity {
         Bitmap imageBitmap = null;
         if (imageBytes != null) {
             imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-        } else {
-
         }
 //        Log.v("strong", imageBitmap.toString());
         return imageBitmap;

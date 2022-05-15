@@ -64,7 +64,7 @@ public class Library extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // call database search method depending on what switch is active
-                String search = searchEntry.getText().toString();
+//                String search = searchEntry.getText().toString();
                 if (titleSwitch.isChecked()) {
 //                    Toast.makeText(Library.this, "title checked", Toast.LENGTH_SHORT).show();
                     showBooksOnRecyclerView(dataBaseHelper.searchTitle(searchEntry.getText().toString()));
