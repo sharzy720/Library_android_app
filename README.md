@@ -22,17 +22,13 @@ Navigate to the latest release and download the apk. Find where you saved the ap
 
 ---
 
-#### To add a book to the library:
+#### To add a book to your collection:
 
-Press the 'Add Book' button. Entering the books isbn and pressing search will search the 
-OpenLibrary api for details about the given book. To add the book to the library simple press 
-the 'Add to library' button.
+Press the + button in your collection to bring up the search page. Enter a book's isbn and press search to search the api for a book with that isbn. When found the cover, title, and author will be displayed on the page. If the shown data matches the book you want to add to your collection press add to library. More help can be found by pressing the ? button to bring up a help menu.
 
-#### Search book collection:
+#### Search your book collection:
 
-Once you are on the collection page searching is easy. Simple enter the title, author, or isbn 
-you want to search for. Then select the respective switch followed by the search button. If you 
-want to return to viewing all the books in the collection simply press the 'View all' button.
+To search your book collection navigate to the collection page and in the search bar at the top enter either a books title, author, or isbn. Then select the relevant switch for your search and press search. If you want to go back to viewing all the books in your collection press view all. 
 
 ## Credits:
 
