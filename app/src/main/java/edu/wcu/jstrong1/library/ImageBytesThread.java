@@ -38,10 +38,18 @@ public class ImageBytesThread implements Runnable {
 
     // Getters and Setters
 
+    /**
+     * Set the url for an image
+     * @param url Image address
+     */
     public void setImageAddress(String url) {
         imageAddress = url;
     }
 
+    /**
+     * Get the byte array of the found image
+     * @return Byte array of image
+     */
     public byte[] getImageBytes() {
         return imageBytes;
     }

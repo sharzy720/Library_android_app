@@ -2,6 +2,7 @@ package edu.wcu.jstrong1.library;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -18,14 +19,23 @@ public class AppSettings extends Application {
     /** Name of file where settings are saved */
     String filename = "LibrarySavedSettings.txt";
 
+    /**
+     * export database file to user given location
+     */
     public void exportDatabase() {
-
+        // TODO implement
     }
 
+    /**
+     * import Database file from user given location
+     */
     public void importDatabase() {
-
+        // TODO implement
     }
 
+    /**
+     * Save settings to a file
+     */
     public void saveSettings() {
         //Create a file if its not already on disk
         File file = new File(this.getFilesDir(), filename);
@@ -42,22 +52,20 @@ public class AppSettings extends Application {
             outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
             outputStream.write(string.getBytes());
             outputStream.close();
-            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
-        }
-        catch(FileNotFoundException e){
+            Log.v("settings", "Saved");
+//            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
+        } catch(IOException e){
             Toast.makeText(this, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
-        }
-        catch(IOException e){
-            Toast.makeText(this, "Error saving file", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-        catch (Exception e) {//else if failed trying do this
+        } catch (Exception e) {//else if failed trying do this
             Toast.makeText(this, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }
 
+    /**
+     * Load saved settings from a file
+     */
     public void loadSettings() {
         // See http://developer.android.com/guide/topics/data/data-  storage.html#filesExternal
 
@@ -116,6 +124,10 @@ public class AppSettings extends Application {
         checkMode();
     }
 
+    /**
+     * Sets the app to dark mode depending on parameter
+     * @param mode If dark mode should be enabled or not
+     */
     public void setDarkMode(boolean mode) {
         if (mode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -126,6 +138,9 @@ public class AppSettings extends Application {
         }
     }
 
+    /**
+     * Checks if the app should be in dark mode depending on the app theme
+     */
     private void checkMode() {
         if (appColor.contains("red") || appColor.contains("blue") || appColor.contains("orange") ||
                 appColor.contains("purple") || appColor.contains("dark")) {

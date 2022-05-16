@@ -74,7 +74,7 @@ public class AddBook extends AppCompatActivity {
         pj.setIsbn("");
         ch = new CoverHelper();
 
-        // Searching api for book with matching isbn number
+        // On click for search button, searches API for book with matching isbn
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,20 +84,8 @@ public class AddBook extends AppCompatActivity {
                     if (isbn.length() == 9) {
                         isbn = isbn + "X";
                     }
-                    // test isbn
 //                String isbn = "9781501120602";
-                    pj.setIsbn(isbn);
-                    try {
-//                        new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
-                        JsonTaskThread jsonTaskThread = new JsonTaskThread();
-                        jsonTaskThread.setJsonUrl("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json");
-                        Thread thread = new Thread(jsonTaskThread);
-                        thread.start();
-                        thread.join();
-                        pj = jsonTaskThread.getPj();
-                    } catch (InterruptedException e) { // ExecutionException |
-                        e.printStackTrace();
-                    }
+                    pj = getJson(isbn);
                     pj.setIsbn(isbn);
                     setBookCover(AddBook.this.pj.getMediumCoverURL(), bookCover);
                     bookTitle.setText("Title: " + AddBook.this.pj.getTitleString());
@@ -109,7 +97,7 @@ public class AddBook extends AppCompatActivity {
             }
         });
 
-        // Adds found book to database
+        // On click for add to library button, adds found book to database
         addToLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,20 +110,8 @@ public class AddBook extends AppCompatActivity {
                     if (pj.getTitleString() == null) {
 //                        Toast.makeText(AddBook.this, "No previous search", Toast.LENGTH_SHORT).show();
                         isbn = isbnEntry.getText().toString();
-                        // test isbn
-//                        isbn = "9781501120602";
-                        String test;
-                        try {
-//                            test = new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
-                            JsonTaskThread jsonTaskThread = new JsonTaskThread();
-                            jsonTaskThread.setJsonUrl("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json");
-                            Thread thread = new Thread(jsonTaskThread);
-                            thread.start();
-                            thread.join();
-                            pj = jsonTaskThread.getPj();
-                        } catch (InterruptedException e) { // ExecutionException |
-                            e.printStackTrace();
-                        }
+//                        isbn = "9781501120602"; // test isbn
+                        pj = getJson(isbn);
                         pj.setIsbn(isbn);
                     }
                     // Add book to database and display toast
@@ -169,6 +145,7 @@ public class AddBook extends AppCompatActivity {
             }
         });
 
+        // On click for help button
         helpBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,91 +174,32 @@ public class AddBook extends AppCompatActivity {
     }
 
     /**
+     * Retrieves json file for book with given isbn
+     * @param isbn Book's isbn
+     * @return ParseJson holding all the books information
+     */
+    private ParseJson getJson(String isbn) {
+        ParseJson parseJson = new ParseJson();
+        try {
+//            test = new JsonTask().execute("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json").get();
+            JsonTaskThread jsonTaskThread = new JsonTaskThread();
+            jsonTaskThread.setJsonUrl("https://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json");
+            Thread thread = new Thread(jsonTaskThread);
+            thread.start();
+            thread.join();
+            parseJson = jsonTaskThread.getPj();
+        } catch (InterruptedException e) { // ExecutionException |
+            e.printStackTrace();
+        }
+        return parseJson;
+    }
+
+    /**
      * Set book cover to an image url using glide
      * @param imageAddress url to image
      * @param coverLocation imageView to set image to
      */
     private void setBookCover(String imageAddress, ImageView coverLocation) {
         Glide.with(this).load(imageAddress).into(coverLocation);
-    }
-
-    // TODO breakout to Thread class
-
-    /**
-     * AsyncTask for parsing json from api url
-     */
-    private class JsonTask extends AsyncTask<String, String, String> {
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            pd = new ProgressDialog(AddBook.this);
-            pd.setMessage("Please wait");
-            pd.setCancelable(false);
-            pd.show();
-        }
-
-        protected String doInBackground(String... params) {
-            Log.v("strong", "Searching api");
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-                InputStream stream = connection.getInputStream();
-
-                JsonParser jp = new JsonParser(); //from gson
-                JsonElement root = jp.parse(new InputStreamReader(stream)); //Convert the input
-                // stream to a json element
-                if (root.isJsonNull()) {
-                    System.out.println("No book with this isbn");
-                } else if (root.isJsonArray()) {
-                    if (root.getAsJsonArray().size() == 0) {
-                        System.out.println("No book with this isbn");
-                    }
-                } else {
-                    pj.getBookDetails(root);
-                    Log.v("strong", "test's value in JsonTask: " + pj.toString());
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            setBookCover(AddBook.this.pj.getMediumCoverURL(), bookCover);
-                            bookTitle.setText("Title: " + AddBook.this.pj.getTitleString());
-                            bookAuthor.setText("Author: " + AddBook.this.pj.getAuthorString());
-                        }
-                    });
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if (pd.isShowing()){
-                pd.dismiss();
-            }
-            Log.v("strong", "parsed json");
-        }
     }
 }

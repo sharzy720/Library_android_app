@@ -30,8 +30,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_LARGE_COVER = "LARGE_COVER";
 
     /**
-     *
-     * @param context
+     * Constructor
+     * @param context Context for pairing with DataBaseHelper
      */
     public DataBaseHelper(@Nullable Context context) {
         super(context, "customer.db", null, 1);
@@ -55,8 +55,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTableStatement);
     }
 
-    // this is called if the database cersion number chanes. Is prevents previoud users apps from
-    // breakin when you change the databse design.
+    // this is called if the database version number changes. Is prevents previous users apps from
+    // breaking when you change the database design.
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
@@ -79,11 +79,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_LARGE_COVER, bookModel.getLargeCover());
 
         long insert = db.insert(BOOK_TABLE, null, cv);
-        if (insert == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return insert != -1;
     }
 
     /**
@@ -102,8 +98,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()) {
+//            cursor.close();
             return true;
         } else {
+//            cursor.close();
             return false;
         }
     }
@@ -141,8 +139,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 returnList.add(newBook);
 
             } while (cursor.moveToNext());
-        } else {
-
         }
         // close both the cursor and the db when done.
         cursor.close();
@@ -182,8 +178,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 returnList.add(newBook);
 
             } while (cursor.moveToNext());
-        } else {
-
         }
         // close both the cursor and the db when done.
         cursor.close();
@@ -224,8 +218,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 returnList.add(newBook);
 
             } while (cursor.moveToNext());
-        } else {
-
         }
         // close both the cursor and the db when done.
         cursor.close();
@@ -252,7 +244,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()) {
-            // loop throuh the cursor (result set) and create new customer objects. Put them into
+            // loop through the cursor (result set) and create new customer objects. Put them into
             // the return list.
 
             do {

@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class JsonTaskThread implements Runnable{
@@ -17,7 +16,19 @@ public class JsonTaskThread implements Runnable{
     /** Address for a books Json **/
     private String jsonUrl;
 
+    /** Holds all found data about given book **/
     private ParseJson pj;
+
+    // TODO look into adding a progress dialog
+//  Start progress dialog
+//            pd = new ProgressDialog(AddBook.this);
+//            pd.setMessage("Please wait");
+//            pd.setCancelable(false);
+//            pd.show();
+//  End progress dialog
+//            if (pd.isShowing()){
+//                pd.dismiss();
+//            }
 
     @Override
     public void run() {
@@ -56,8 +67,6 @@ public class JsonTaskThread implements Runnable{
 //                    }
 //                });
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -75,11 +84,14 @@ public class JsonTaskThread implements Runnable{
     }
 
     /**
-     *
-     * @param url
+     * Set url for json file
+     * @param url Json url
      */
     public void setJsonUrl(String url) {this.jsonUrl = url;}
 
-
+    /**
+     * Gets ParseJson created from url
+     * @return ParseJson of book details
+     */
     public ParseJson getPj() {return this.pj;}
 }
