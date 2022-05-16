@@ -1,9 +1,12 @@
 package edu.wcu.jstrong1.library;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Helper class for dealing with book cover images
@@ -59,11 +62,10 @@ public class CoverHelper extends AppCompatActivity {
      * Using a thread to get a byte array based off of an image
      * @param url Address to the image
      * @return Byte array of image
-     * @throws InterruptedException
+     * @throws InterruptedException When the thread is interrupted
      */
     public byte[] getImageFromUrl(String url) throws InterruptedException {
         Log.v("strong", "Getting image from: " + url);
-
         ImageBytesThread imageBytesThread = new ImageBytesThread();
         imageBytesThread.setImageAddress(url);
         Thread thread = new Thread(imageBytesThread);
@@ -72,4 +74,16 @@ public class CoverHelper extends AppCompatActivity {
         return imageBytesThread.getImageBytes();
     }
 
+    /**
+     * Gets the byte array for the substitute cover when a book is missing one
+     * @param resources Resources to use when getting drawable
+     * @return Missing cover drawable as byte array
+     */
+    public byte[] getMissingCover(Resources resources) {
+        Log.v("strong", "Getting image from drawable");
+        Bitmap bitmap = BitmapFactory.decodeResource(resources, R.drawable.missing_book_cover);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        return stream.toByteArray();
+    }
 }
