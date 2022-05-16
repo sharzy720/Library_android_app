@@ -2,8 +2,6 @@ package edu.wcu.jstrong1.library;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,17 +10,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Class for add_book.xml
@@ -98,52 +85,7 @@ public class AddBook extends AppCompatActivity {
         });
 
         // On click for add to library button, adds found book to database
-        addToLibrary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Toast.makeText(AddBook.this, "Add clicked", Toast.LENGTH_SHORT).show();
-                String isbn = null;
-//                if (isbnEntry.getText().toString().matches("")) {
-                if (!pj.getValidBook()) {
-                    Toast.makeText(AddBook.this, "Search for book first", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (pj.getTitleString() == null) {
-//                        Toast.makeText(AddBook.this, "No previous search", Toast.LENGTH_SHORT).show();
-                        isbn = isbnEntry.getText().toString();
-//                        isbn = "9781501120602"; // test isbn
-                        pj = getJson(isbn);
-                        pj.setIsbn(isbn);
-                    }
-                    // Add book to database and display toast
-
-                    BookModel bookModel;
-                    try {
-                        byte[] testImageBytes = ch.getImageFromUrl(pj.getSmallCoverURL());
-                        bookModel = new BookModel(-1, pj.getIsbn(), pj.getTitleString(),
-                                pj.getAuthorString(),
-                                ch.getImageFromUrl(pj.getSmallCoverURL()),
-                                ch.getImageFromUrl(pj.getMediumCoverURL()),
-                                ch.getImageFromUrl(pj.getLargeCoverURL()));
-
-//                        Toast.makeText(AddBook.this, bookModel.toString(), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        Toast.makeText(AddBook.this, "Error creating book",
-                                Toast.LENGTH_SHORT).show();
-                        bookModel = new BookModel();
-                    }
-                    DataBaseHelper dataBaseHelper = new DataBaseHelper(AddBook.this);
-
-                    boolean success = dataBaseHelper.addBook(bookModel);
-
-                    if (success) {
-                        Toast.makeText(AddBook.this, "Book Added to library", Toast.LENGTH_SHORT).show();
-                    }
-
-//                showCustomersOnListView();
-                    Log.v("strong", "pj value in AddBook: " + pj.toString());
-                }
-            }
-        });
+        addToLibrary.setOnClickListener(addToLibraryListener());
 
         // On click for help button
         helpBut.setOnClickListener(new View.OnClickListener() {
@@ -174,6 +116,83 @@ public class AddBook extends AppCompatActivity {
     }
 
     /**
+     * Add to library button's onClickListener
+     * @return New onClickListener
+     */
+    private View.OnClickListener addToLibraryListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText(AddBook.this, "Add clicked", Toast.LENGTH_SHORT).show();
+                String isbn = null;
+//                if (isbnEntry.getText().toString().matches("")) {
+                if (!pj.getValidBook()) {
+                    Toast.makeText(AddBook.this, "Search for book first", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (pj.getTitleString() == null) {
+//                        Toast.makeText(AddBook.this, "No previous search", Toast.LENGTH_SHORT).show();
+                        isbn = isbnEntry.getText().toString();
+//                        isbn = "9781501120602"; // test isbn
+                        pj = getJson(isbn);
+                        pj.setIsbn(isbn);
+                    }
+                    // Add book to database and display toast
+
+                    BookModel bookModel;
+                    try {
+                        byte[] testImageBytes = ch.getImageFromUrl(pj.getSmallCoverURL());
+                        if (pj.getSmallCoverURL() == null) {
+                            bookModel = createBookMissingCover();
+                        } else {
+                            bookModel = createBookWithCover();
+                        }
+
+//                        Toast.makeText(AddBook.this, bookModel.toString(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(AddBook.this, "Error creating book",
+                                Toast.LENGTH_SHORT).show();
+                        bookModel = new BookModel();
+                    }
+                    DataBaseHelper dataBaseHelper = new DataBaseHelper(AddBook.this);
+
+                    boolean success = dataBaseHelper.addBook(bookModel);
+
+                    if (success) {
+                        Toast.makeText(AddBook.this, "Book Added to library", Toast.LENGTH_SHORT).show();
+                    }
+
+//                showCustomersOnListView();
+                    Log.v("strong", "pj value in AddBook: " + pj.toString());
+                }
+            }
+        };
+    }
+
+    /**
+     * Create a new BookModel object for a book with a valid cover
+     * @return Newly created book with a cover
+     */
+    private BookModel createBookWithCover() throws InterruptedException {
+        return new BookModel(-1, pj.getIsbn(), pj.getTitleString(),
+                pj.getAuthorString(),
+                ch.getImageFromUrl(pj.getSmallCoverURL()),
+                ch.getImageFromUrl(pj.getMediumCoverURL()),
+                ch.getImageFromUrl(pj.getLargeCoverURL()));
+    }
+
+    /**
+     * Create a new BookModel object for a book missing a cover
+     * @return Newly created book missing a cover
+     */
+    private BookModel createBookMissingCover() {
+        return new BookModel(-1, pj.getIsbn(), pj.getTitleString(),
+                pj.getAuthorString(),
+                ch.getMissingCover(getResources()),
+                ch.getMissingCover(getResources()),
+                ch.getMissingCover(getResources()));
+    }
+
+    /**
      * Retrieves json file for book with given isbn
      * @param isbn Book's isbn
      * @return ParseJson holding all the books information
@@ -200,6 +219,10 @@ public class AddBook extends AppCompatActivity {
      * @param coverLocation imageView to set image to
      */
     private void setBookCover(String imageAddress, ImageView coverLocation) {
-        Glide.with(this).load(imageAddress).into(coverLocation);
+        if (imageAddress == null) {
+            Glide.with(this).load(R.drawable.missing_book_cover).into(coverLocation);
+        } else {
+            Glide.with(this).load(imageAddress).into(coverLocation);
+        }
     }
 }
