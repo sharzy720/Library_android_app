@@ -12,6 +12,12 @@ An android app that allows for you to simply catalog your book collection.
 * A book can be removed from the collection on its detail page
 * Multithreading is used to speed up retrieving book details from the internet
 
+## How to install
+
+---
+
+Navigate to the latest release and download the apk. Find where you saved the apk and tap it to begin the installation. When prompted press install and if a "play protect" warning pops up press install anyway. Once the app is installed find the app titled "Library" with a green android icon and open it to begin your book collection.
+
 ## How to use
 
 ---
