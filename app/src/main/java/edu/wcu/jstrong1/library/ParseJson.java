@@ -124,7 +124,12 @@ public class ParseJson extends Application {
 
             titleString = title.getAsString();
             authorString = author.getAsString();
-            numOfPages = numberOfPages.getAsString();
+
+            if (numberOfPages == null) {
+                numOfPages = "null";
+            } else {
+                numOfPages = numberOfPages.getAsString();
+            }
 
             if (titleString != null || !(titleString.equals(""))) {
                 validBook = true;
