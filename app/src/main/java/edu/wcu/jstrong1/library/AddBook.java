@@ -16,24 +16,37 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  */
 public class AddBook extends AppCompatActivity {
 
+    /** EditText for isbn entry **/
     private EditText isbnEntry;
+
+    /** Button to search for book using api **/
     private Button search;
+
+    /** Button to add new book to library **/
     private Button addToLibrary;
 
+    /** FloatingActionButton for displaying a help message **/
     private FloatingActionButton helpBut;
 
+    /** ImageView for displaying the searched books cover **/
     private ImageView bookCover;
+
+    /** TextView for displaying the searched books title **/
     private TextView bookTitle;
+
+    /** TextView for displaying the searched books author **/
     private TextView bookAuthor;
 
+    /** ParseJson for pulling information from received books json **/
     private ParseJson pj;
+
+    /** CoverHelper for getting an images' bitmap or byte array **/
     private CoverHelper ch;
 
-    private ProgressDialog pd;
-
+    /** Background layout of activity **/
     private RelativeLayout ab_main_layout;
 
-    /** App's application class */
+    /** Application class for apps settings */
     private AppSettings settings;
 
     @Override
@@ -51,7 +64,7 @@ public class AddBook extends AppCompatActivity {
 
         ab_main_layout = findViewById(R.id.ab_main_layout);
 
-        // Setting the background
+        // Setting apps theme to saved value
         settings = (AppSettings) getApplication();
         String background = settings.getAppColor();
         int id = getResources().getIdentifier(background, "drawable", this.getPackageName());

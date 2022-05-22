@@ -17,23 +17,41 @@ import java.util.List;
  */
 public class Library extends AppCompatActivity {
 
+    /** EditText for searching a user's library */
     private EditText searchEntry;
+
+    /** Switch for searching by a books title */
     private SwitchCompat titleSwitch;
+
+    /** Switch for searching by a books author */
     private SwitchCompat authorSwitch;
+
+    /** Switch for searching by a books isbn */
     private SwitchCompat isbnSwitch;
+
+    /** Button to search library for books that have attributes that contain the value entered in searchEntry */
     private Button search;
+
+    /** Button to display all books in user's library */
     private Button viewAll;
 
+    /** FloatingActionButton to add a new book to the library */
     private FloatingActionButton addBook;
 
+    /** RecyclerView for displaying books in the user's library */
     private RecyclerView bookList;
+
+    /** Background layout of activity **/
     private LinearLayout l_main_layout;
 
-    /** App's application class */
+    /** Application class for apps settings */
     private AppSettings settings;
 
-    ArrayAdapter<BookModel> bookArrayAdapter;
-    DataBaseHelper dataBaseHelper;
+    // May not be needed
+//    private ArrayAdapter<BookModel> bookArrayAdapter;
+
+    /** DataBaseHelper for working with the database backend */
+    private DataBaseHelper dataBaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

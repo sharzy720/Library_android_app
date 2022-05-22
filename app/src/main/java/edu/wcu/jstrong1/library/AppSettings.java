@@ -17,7 +17,7 @@ public class AppSettings extends Application {
     private String appColor = "blue_gradient";
 
     /** Name of file where settings are saved */
-    String filename = "LibrarySavedSettings.txt";
+    private final String filename = "LibrarySavedSettings.txt";
 
     /**
      * export database file to user given location
@@ -37,10 +37,10 @@ public class AppSettings extends Application {
      * Save settings to a file
      */
     public void saveSettings() {
-        //Create a file if its not already on disk
+        //Create a file if it's not already on disk
         File file = new File(this.getFilesDir(), filename);
 
-        //By default black text if no text can be generated from the notePad.
+        //By default, black text if no text can be generated from the notePad.
         String string = "";
 
         //Save app color to file
@@ -48,7 +48,7 @@ public class AppSettings extends Application {
 
         FileOutputStream outputStream;//declare FOS
 
-        try{  //to do this
+        try{
             outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
             outputStream.write(string.getBytes());
             outputStream.close();
@@ -57,7 +57,7 @@ public class AppSettings extends Application {
         } catch(IOException e){
             Toast.makeText(this, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
-        } catch (Exception e) {//else if failed trying do this
+        } catch (Exception e) { // else if failed trying this
             Toast.makeText(this, "Error saving file", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
@@ -69,13 +69,13 @@ public class AppSettings extends Application {
     public void loadSettings() {
         // See http://developer.android.com/guide/topics/data/data-  storage.html#filesExternal
 
-        //Create a file if its not already on disk
+        //Create a file if it's not already on disk
         File extDir = new File(this.getFilesDir(),  filename);
 
         //Read text from file
         StringBuilder text = new StringBuilder();
 
-        //Needs lots of try and catch blocks because so much can go wron
+        //Needs lots of try and catch blocks because so much can go wrong
         try{
             BufferedReader br = new BufferedReader(new FileReader(extDir));
             String line;
@@ -98,7 +98,7 @@ public class AppSettings extends Application {
             e.printStackTrace();
         }//end catch
 
-        //Set the data from the file content and conver it to a String
+        //Set the data from the file content and converse it to a String
         String data = new String(text);
 
         //Safety first

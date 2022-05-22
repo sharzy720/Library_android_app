@@ -17,16 +17,28 @@ import java.util.List;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    // Name of the book table
+    /** Name of the user's library table */
     public static final String BOOK_TABLE = "BOOK_TABLE";
 
-    // Name of each of the columns in the book table
+    /** Name of the first column of the library table */
     public static final String COLUMN_ID = "ID";
-    public static final String COLUMN_BOOK_ISBN = " BOOK_ISBN";
+
+    /** Name of the second column of the library table */
+    public static final String COLUMN_BOOK_ISBN = "BOOK_ISBN";
+
+    /** Name of the third column of the library table */
     public static final String COLUMN_BOOK_TITLE = "BOOK_TITLE";
+
+    /** Name of the fourth column of the library table */
     public static final String COLUMN_BOOK_AUTHOR = "BOOK_AUTHOR";
+
+    /** Name of the fifth column of the library table */
     public static final String COLUMN_SMALL_COVER = "SMALL_COVER";
+
+    /** Name of the sixth column of the library table */
     public static final String COLUMN_MEDIUM_COVER = "MEDIUM_COVER";
+
+    /** Name of the seventh column of the library table */
     public static final String COLUMN_LARGE_COVER = "LARGE_COVER";
 
     /**
@@ -41,7 +53,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // create a new database
     @Override
     public void onCreate(SQLiteDatabase db) {
-
 
         String createTableStatement = "CREATE TABLE " + BOOK_TABLE + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

@@ -12,13 +12,18 @@ import android.os.Bundle;
  */
 public class MainActivity extends AppCompatActivity {
 
+    /** Button to open libray page and view books in user's library */
     private Button mm_view_books;
-    private Button mm_add_book;
+
+//    private Button mm_add_book;
+
+    /** Button to open the settings page */
     private Button mm_settings;
 
+    /** Background layout of activity **/
     private RelativeLayout mm_main_layout;
 
-    /** App's application class */
+    /** Application class for apps settings */
     private AppSettings settings;
 
     @Override
@@ -27,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mm_view_books = findViewById(R.id.mm_view_books_but);
-        mm_add_book = findViewById(R.id.mm_add_book_but);
+//        mm_add_book = findViewById(R.id.mm_add_book_but);
         mm_settings = findViewById(R.id.mm_settings_but);
         mm_main_layout = findViewById(R.id.mm_main_layout);
 
@@ -48,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // On click for Add Book button
-        mm_add_book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent nextPage = new Intent(MainActivity.this, AddBook.class);
-                startActivity(nextPage);
-            }
-        });
+//        mm_add_book.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent nextPage = new Intent(MainActivity.this, AddBook.class);
+//                startActivity(nextPage);
+//            }
+//        });
 
         // On click for Settings button
         mm_settings.setOnClickListener(new View.OnClickListener() {

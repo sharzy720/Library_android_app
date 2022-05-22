@@ -14,17 +14,28 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class BookDetails extends AppCompatActivity {
 
+    /** ImageView for displaying a books cover **/
     private ImageView cover;
+
+    /** TextView for displaying a books title **/
     private TextView title;
+
+    /** TextView for displaying a books author **/
     private TextView author;
+
+    /** TextView for displaying a books isbn **/
     private TextView isbn;
+
+    /** Button to delete the displayed book **/
     private Button deleteBook;
 
+    /** CoverHelper for getting an images' bitmap or byte array **/
     private CoverHelper coverHelper;
 
+    /** Background layout of activity **/
     private RelativeLayout bd_main_layout;
 
-    /** App's application class */
+    /** Application class for apps settings */
     private AppSettings settings;
 
     @Override
@@ -32,6 +43,7 @@ public class BookDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_details);
 
+        // Setting all views using their ids
         cover = findViewById(R.id.bd_cover);
         title = findViewById(R.id.bd_title);
         author = findViewById(R.id.bd_author);

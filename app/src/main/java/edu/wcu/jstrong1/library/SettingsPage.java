@@ -12,17 +12,31 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class SettingsPage extends AppCompatActivity implements View.OnClickListener{
 
+    /** Button to set app theme to red **/
     private Button redBut;
+
+    /** Button to set app theme to green **/
     private Button greenBut;
+
+    /** Button to set app theme to blue **/
     private Button blueBut;
+
+    /** Button to set app theme to orange **/
     private Button orangeBut;
+
+    /** Button to set app theme to purple **/
     private Button purpleBut;
+
+    /** Button to set app theme to light-mode **/
     private Button lightModeBut;
+
+    /** Button to set app theme to dark mode **/
     private Button darkModeBut;
 
-    /** App's application class */
+    /** Application class for apps settings */
     private AppSettings settings;
 
+    /** Background layout of activity **/
     private RelativeLayout mainLayout;
 
     @Override

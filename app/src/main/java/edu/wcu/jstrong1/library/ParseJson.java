@@ -23,15 +23,31 @@ import java.util.Set;
  * Class for pulling data from a json element
  */
 public class ParseJson extends Application {
+    /** Books isbn **/
     private String isbn;
+
+    /** Books title **/
     private String titleString;
+
+    /** Books title **/
     private String authorString;
+
+    /** Books number of pages **/
     private String numOfPages;
+
+    /** Books small sized cover url **/
     private String smallCoverURL;
+
+    /** Books medium sized cover url **/
     private String mediumCoverURL;
+
+    /** Books large sized cover url **/
     private String largeCoverURL;
+
+    /** Whether a book is valid or not **/
     private Boolean validBook;
-    ProgressDialog pd;
+
+//    private ProgressDialog pd;
 
     /**
      * Default constructor
@@ -163,7 +179,7 @@ public class ParseJson extends Application {
                 ", smallCoverURL='" + smallCoverURL + '\'' +
                 ", mediumCoverURL='" + mediumCoverURL + '\'' +
                 ", largeCoverURL='" + largeCoverURL + '\'' +
-                ", pd=" + pd +
+//                ", pd=" + pd +
                 '}';
     }
 

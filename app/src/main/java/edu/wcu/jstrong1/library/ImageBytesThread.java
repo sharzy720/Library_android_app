@@ -12,6 +12,7 @@ import java.net.URL;
  * Thread Class for handling getting an image from an url
  */
 public class ImageBytesThread implements Runnable {
+
     /** Byte array for image found at url */
     private volatile byte[] imageBytes;
 

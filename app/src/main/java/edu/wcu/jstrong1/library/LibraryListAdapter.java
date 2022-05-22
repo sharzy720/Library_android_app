@@ -16,21 +16,24 @@ import java.util.List;
  */
 public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.MyViewHolder> {
 
-    /**An array of strings holds the data**/
+    /** An array of BookModels that hold data about books **/
     private List<BookModel> mDataset;
 
+    /** Observer for telling when an item is clicked */
     private ItemWasClicked observer;
 
 //==============================================================================================
-    /**Provide a suitable constructor (depends on the kind of dataset)
-     * @param myDataset For us the data set is just a String.
+    /**
+     * Provide a suitable constructor (depends on the kind of dataset)
+     * @param myDataset List of BookModels
      */
     public LibraryListAdapter(List<BookModel> myDataset) {
         mDataset = myDataset;
     }//end
 
 //==============================================================================================
-    /**Return the size of the dataset (invoked by the layout manager)
+    /**
+     * Return the size of the dataset (invoked by the layout manager)
      * @return The data set size.
      */
     @Override
@@ -39,7 +42,8 @@ public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.
     }//end
 
 //==============================================================================================
-    /**Replace the contents of a view (invoked by the layout manager)
+    /**
+     * Replace the contents of a view (invoked by the layout manager)
      * @param holder The holder view which will hold one list item
      * @param position  The index position within the data set.
      */
@@ -61,12 +65,17 @@ public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.
     }//end
 
     //==============================================================================================
+
+    /**
+     * Set the onItemClickedObserver
+     * @param iwc new ItemWasClicked observer
+     */
     public void setOnItemClickedObserver(ItemWasClicked iwc) {
         this.observer = iwc;
     }
 
     public interface ItemWasClicked{
-        // Only a String because the array is of type Strings
+        // Only a BookModel because the array is of type BookModels
         public void itemWasClicked(BookModel book);
     }
     //==============================================================================================
@@ -76,10 +85,11 @@ public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.
         return position % 2;
     }
 //==============================================================================================
-    /** Create new views (invoked by the layout manager)
-     * @param parent The parent for this this veiw is part of
+    /**
+     * Create new views (invoked by the layout manager)
+     * @param parent The parent for this view is part of
      * @param viewType an int representing the viewType
-     * @return  An instance of the inner class MyViewHolder
+     * @return An instance of the inner class MyViewHolder
      */
     @Override
     public LibraryListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -91,17 +101,23 @@ public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.
         return vh;
     }//end
     //-------------------------------------------------------------------------------------------
-    /**An inner class to provide a reference to the views for each data item
-     Complex data items may need more than one view per item, and
-     you provide access to all the views for a data item in a view holder**/
+    /**
+     * An inner class to provide a reference to the views for each data item.
+     * Complex data items may need more than one view per item, and you provide access to all the views for a data item in a view holder
+     **/
     //-------------------------------------------------------------------------------------------
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        /**each data item is just a string in this case**/
+        /** ImageView for displaying a books cover **/
         public ImageView bookCover;
+
+        /** ImageView for displaying a books title **/
         public TextView bookTitle;
+
+        /** ImageView for displaying a books author **/
         public TextView bookAuthor;
 
-        /** A simple constructor with one view.
+        /**
+         * A simple constructor with one view.
          * @param v A textView object to hold a string.
          */
         public MyViewHolder(ViewGroup v) {
@@ -114,7 +130,7 @@ public class LibraryListAdapter extends RecyclerView.Adapter<LibraryListAdapter.
             bookAuthor.setTag("author");
 
             v.setOnClickListener(this);
-        }//End mthod
+        }//End method
 
 //        public void setOnItemCLickListener(View.OnClickListener v) {
 //            name.setOnClickListener(v);
