@@ -31,6 +31,8 @@ Press the + button in your collection to bring up the search page. Enter a book'
 
 #### Search your book collection:
 
+![video for searching your library](http://johnathynstrong.rf.gd/vid/library_app_search_library.gif)
+
 [![video for searching your library](http://johnathynstrong.rf.gd/vid/library_app_search_library.mp4/0.jpg)](http://johnathynstrong.rf.gd/vid/library_app_search_library.mp4)
 
 To search your book collection navigate to the collection page and in the search bar at the top enter either a books title, author, or isbn. Then select the relevant switch for your search and press search. If you want to go back to viewing all the books in your collection press view all. 
