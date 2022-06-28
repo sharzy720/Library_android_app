@@ -24,16 +24,16 @@ Navigate to the latest release and download the apk. Find where you saved the ap
 
 #### To add a book to your collection:
 
-[![video for adding a new book to your library](http://johnathynstrong.rf.gd/vid/library_app_add_new_book.mp4/0.jpg)](http://johnathynstrong.rf.gd/vid/library_app_add_new_book.mp4)
+<!-- [![video for adding a new book to your library](http://johnathynstrong.rf.gd/vid/library_app_add_new_book.mp4/0.jpg)](http://johnathynstrong.rf.gd/vid/library_app_add_new_book.mp4) -->
 
 Press the + button in your collection to bring up the search page. Enter a book's isbn and press search to search the api for a book with that isbn. When found the cover, title, and author will be displayed on the page. If the shown data matches the book you want to add to your collection press add to library. More help can be found by pressing the ? button to bring up a help menu.
 
 
 #### Search your book collection:
 
-![video for searching your library](http://johnathynstrong.rf.gd/vid/library_app_search_library.gif)
+<!-- ![video for searching your library](http://johnathynstrong.rf.gd/vid/library_app_search_library.gif)
 
-[![video for searching your library](http://johnathynstrong.rf.gd/vid/library_app_search_library.mp4/0.jpg)](http://johnathynstrong.rf.gd/vid/library_app_search_library.mp4)
+[![video for searching your library](http://johnathynstrong.rf.gd/vid/library_app_search_library.mp4/0.jpg)](http://johnathynstrong.rf.gd/vid/library_app_search_library.mp4) -->
 
 To search your book collection navigate to the collection page and in the search bar at the top enter either a books title, author, or isbn. Then select the relevant switch for your search and press search. If you want to go back to viewing all the books in your collection press view all. 
 
